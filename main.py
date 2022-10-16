@@ -4,10 +4,19 @@ import encrypt2
 import decrypt2
 import generatePrivateKey
 
-generatePrivateKey.generate()
-encrypt1.encryptWithPublicKey('data.txt')
-encrypt2.sigWithPublicKey()
-if decrypt2.verify():
-    decrypt1.decryptWithPrivateKey()
-else:
-    raise "ERROR"
+
+class mailbox():
+    def __init__(self):
+        generatePrivateKey.generate()
+
+    def encrypt(self):
+        encrypt1.encryptWithPublicKey('data.txt')
+
+    def sign(self):
+        encrypt2.signWithPrivateKey()
+
+    def dycrypt(self):
+        if decrypt2.verify():
+            decrypt1.decryptWithPrivateKey()
+        else:
+            raise "ERROR"
