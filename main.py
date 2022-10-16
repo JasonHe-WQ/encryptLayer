@@ -3,7 +3,6 @@
 # import encrypt2
 # import decrypt2
 import generatePrivateKey
-# import web3
 from eth_account import Account
 
 
