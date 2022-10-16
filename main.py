@@ -20,3 +20,8 @@ class mailbox():
             decrypt1.decryptWithPrivateKey()
         else:
             raise "ERROR"
+
+msg = mailbox()
+msg.encrypt()
+msg.sign()
+msg.dycrypt()

@@ -15,4 +15,3 @@ def verify(filepath='sig.bin', fileBeforeSign='encrypted_data.bin'):
     hashObj = SHA256.new(toEncyrpt)
     verified = PKCS1_v1_5.new(publicKey)
     return verified.verify(hashObj, signature)
-print(verify())
