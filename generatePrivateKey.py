@@ -1,11 +1,17 @@
-from Crypto.PublicKey import RSA
+from eth_account import Account
+import secrets
 
 def generate():
-    key = RSA.generate(1024)
-    privateKey = key.export_key()
-    with open("private.pem", "wb") as f:
-        f.write(privateKey)
 
-    publicKey = key.publickey().export_key()
-    with open("receiver.pem", "wb") as f:
-        f.write(publicKey)
+
+    privateKey = secrets.token_bytes(32)
+    privateKeyInHex = '0x' + privateKey.hex()
+    print(privateKeyInHex +'Save It And Not Share It')
+    acct = Account.from_key(privateKey)
+    print("Address:", acct.address)
+
+    with open("private.txt", "w") as f:
+        f.write(privateKeyInHex)
+
+    with open("receiver.txt", "w") as f:
+        f.write(acct.address)
