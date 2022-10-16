@@ -1,5 +1,5 @@
 # import decrypt1
-# import encrypt1
+import encrypt1
 # import encrypt2
 # import decrypt2
 import generatePrivateKey
@@ -24,8 +24,7 @@ class mailbox():
             self.address = acct.address
 
     def encrypt(self):
-        data = input('Please Input Your Data')
-        encrypt1.encryptWithPublicKey(data)
+        encrypt1.encryptWithPublicKey(type,self.__privateKey)
     #
     # def sign(self):
     #     encrypt2.signWithPrivateKey()
