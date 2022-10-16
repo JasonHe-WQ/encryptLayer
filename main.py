@@ -8,23 +8,24 @@ from eth_account import Account
 
 class mailbox():
     def __init__(self, ifHadAccount=False):
+        self.__privateKey = 0x0
+        self.address = 0x0
         """
-        Initialize and Generate a EVM account
+        Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter
         :param ifHadAccount:
         """
         if ifHadAccount == False:
-            generatePrivateKey.generate()
+            self.__privateKey, self.address = generatePrivateKey.generate()
+
         else:
             privateKeyInHex = input('Please Import Your Private Key In Hex')
-            with open("private.txt", "w") as f:
-                f.write(privateKeyInHex)
-
             acct = Account.privateKeyToAccount(privateKeyInHex)
-            with open("receiver.txt", "w") as f:
-                f.write(acct.address)
+            self.__privateKey = privateKeyInHex
+            self.address = acct.address
 
-    # def encrypt(self):
-    #     encrypt1.encryptWithPublicKey('data.txt')
+    def encrypt(self):
+        data = input('Please Input Your Data')
+        encrypt1.encryptWithPublicKey(data)
     #
     # def sign(self):
     #     encrypt2.signWithPrivateKey()
@@ -37,4 +38,5 @@ class mailbox():
 
 
 msg = mailbox()
+print(msg.address)
 

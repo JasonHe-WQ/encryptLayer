@@ -10,8 +10,4 @@ def generate():
     acct = Account.from_key(privateKey)
     print("Address:", acct.address)
 
-    with open("private.txt", "w") as f:
-        f.write(privateKeyInHex)
-
-    with open("receiver.txt", "w") as f:
-        f.write(acct.address)
+    return privateKeyInHex, acct.address
