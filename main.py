@@ -4,12 +4,13 @@ import encrypt2
 import decrypt2
 import generatePrivateKey
 from eth_account import Account
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
+import ESAEncrypt
 
 
 class mailbox():
     def __init__(self, ifHadAccount=False):
+        self.senderAddr = 0x0
+        self.encryptedBytes = bytes()
         self.__privateKey = 0x0
         self.address = 0x0
         self.signature = bytes()
@@ -21,7 +22,7 @@ class mailbox():
         Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter
         :param ifHadAccount:
         """
-        if ifHadAccount == False:
+        if ifHadAccount is False:
             self.__privateKey, self.address = generatePrivateKey.generate()
 
         else:
@@ -38,7 +39,7 @@ class mailbox():
         self.signature = encrypt1.signWithPrivateKey(self.__privateKey)
         print('The Signature has been saved as "signedMessage.bin"')
 
-    def encrypt(self, fromAddr = None, Type = 'RSA'):
+    def encrypt(self, fromAddr=None, Type='RSA'):
         """
         This method will read the text file named 'data.txt' and generate an encrypted text file named
         'encryptedData.txt' with the receiver's address
@@ -46,22 +47,21 @@ class mailbox():
         :param Type:'RSA' for default Ethereum encrypt function, 'ESA' for using same password both sides knew
         :return:
         """
-
-        if self.encryptType=='RSA':
+        self.encryptType = Type
+        if self.encryptType == 'RSA':
             if fromAddr is None:
                 fromAddr = self.address
             self.senderAddr = fromAddr
-            self.encrptedBytes = encrypt2.encryptWithPublicKey(self.senderAddr)
+            self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderAddr)
 
-        elif self.encryptType=='ESA':
-            pass
+        elif self.encryptType == 'ESA':
+            self.password, nonce, tag, self.encryptedBytes = ESAEncrypt.encryptWithPassword()
 
         else:
             raise 'Error, Not supported encrypt type'
 
-
-    def dycrypt(self, fromAddr = None):
-        if self.encryptType=='RSA':
+    def decrypt(self, fromAddr=None):
+        if self.encryptType == 'RSA':
             if fromAddr is None:
                 fromAddr = self.address
             self.senderAddr = fromAddr
@@ -75,7 +75,6 @@ class mailbox():
         else:
             input('Please input your password')
 
-
     def sendOnline(self):
         """
         Not Completed Yet
@@ -86,4 +85,4 @@ class mailbox():
 
 msg = mailbox()
 msg.sign()
-msg.dycrypt()
+msg.decrypt()
