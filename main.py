@@ -97,6 +97,9 @@ class mailbox():
                 except ValueError:
                     print('Password Wrong or Tampering Detected')
                     print('Please Check Again')
+                    ifAgain = input('Another Try?')
+                    if ifAgain is None or False:
+                        break
 
 
 
