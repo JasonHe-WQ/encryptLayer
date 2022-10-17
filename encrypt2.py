@@ -1,4 +1,4 @@
-# Signing with your private key
+# Encrypting with your public key
 import ecies
 
 def encryptWithPublicKey(publicKey):
