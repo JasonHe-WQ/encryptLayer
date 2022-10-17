@@ -6,7 +6,7 @@ import generatePrivateKey
 from eth_account import Account
 import ESAEncrypt
 import ESADecrypt
-
+from eth_keys import keys
 
 class mailbox():
     def __init__(self, ifHadAccount=False):
@@ -14,24 +14,28 @@ class mailbox():
         self.encryptedBytes = bytes()
         self.__privateKey = 0x0
         self.address = 0x0
+        self.publicKey = 0x0
         self.signature = bytes()
         self.ifOnline = False
         self.encryptType = 'RSA'
         self.encryptedMsg = str()
         self.password = bytes()
+        self.acct = object()
         """
         Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter.
         When using again, please import your private key in HEX to continue your conversation.
         :param ifHadAccount:
         """
         if ifHadAccount is False:
-            self.__privateKey, self.address = generatePrivateKey.generate()
+            self.__privateKey, self.address, self.acct = generatePrivateKey.generate()
 
         else:
             privateKeyInHex = input('Please Import Your Private Key In Hex')
             acct = Account.privateKeyToAccount(privateKeyInHex)
             self.__privateKey = privateKeyInHex
             self.address = acct.address
+        Keys = keys.PrivateKey(self.__privateKey)
+        self.publicKey = Keys.public_key
 
     def sign(self):
         """
