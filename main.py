@@ -68,15 +68,18 @@ class mailbox():
         :param password: When self.encryptType == 'ESA', please use this parameter
         :return:
         """
+        flag = bool()
         if fromAddr is None:
             fromAddr = self.address
         self.senderAddr = fromAddr
         ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
         if ans:
             print('Address matched')
+            flag = True
         else:
             print(addr)
             print("Addresses don't match")
+            raise ValueError
         if self.encryptType == 'RSA':
             pass
             # decrypt1.decryptWithPrivateKey()
@@ -85,7 +88,7 @@ class mailbox():
             if password is None:
                 with open('ESAPassword.bin','rb') as f:
                     password = f.read()
-            while True:
+            while flag:
                 """
                 Note that the code generates a ValueError exception when tampering is detected 
                 or the password doesn't match.
@@ -99,7 +102,7 @@ class mailbox():
                     print('Please Check Again')
                     ifAgain = input('Another Try?')
                     if ifAgain is None or False:
-                        break
+                        flag = False
 
 
 
@@ -111,7 +114,7 @@ class mailbox():
         """
         pass
 
-
 msg = mailbox()
+msg.encryptType = 'ESA'
 msg.sign()
 msg.decrypt()
