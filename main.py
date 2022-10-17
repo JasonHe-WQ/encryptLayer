@@ -28,7 +28,7 @@ class mailbox():
         This method will read the encrypted file and generate a signed file name 'signedMessage.bin'
         :return:None
         """
-        encrypt1.signWithPrivateKey(self.__privateKey)
+        signature = encrypt1.signWithPrivateKey(self.__privateKey)
         print('The Signature has been saved as "signedMessage.bin"')
 
     def encrypt(self, fromAddr = None):

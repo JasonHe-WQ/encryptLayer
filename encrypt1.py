@@ -12,3 +12,4 @@ def signWithPrivateKey(privateKey):
     pickle.dump(signedMessage, f)
     f.close()
     print('Signed')
+    return signedMessage.signature
