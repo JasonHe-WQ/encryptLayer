@@ -13,6 +13,7 @@ class mailbox():
         self.signature = bytes()
         self.ifOnline = False
         self.encryptType = 'RSA'
+        self.encryptedMsg = str()
         """
         Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter
         :param ifHadAccount:
@@ -47,21 +48,29 @@ class mailbox():
             if fromAddr is None:
                 fromAddr = self.address
             self.senderAddr = fromAddr
-            encrptedBytes = encrypt2.encryptWithPublicKey(self.senderAddr)
+            self.encrptedBytes = encrypt2.encryptWithPublicKey(self.senderAddr)
 
-        elif self.encryptType
+        elif self.encryptType=='ESA':
+            pass
+
+        else:
+            raise 'Error, Not supported encrypt type'
 
 
     def dycrypt(self, fromAddr = None):
-        if fromAddr is None:
-            fromAddr = self.address
-        self.senderAddr = fromAddr
-        ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
-        if ans:
-            print('Address matched')
-            # decrypt1.decryptWithPrivateKey()
+        if self.encryptType=='RSA':
+            if fromAddr is None:
+                fromAddr = self.address
+            self.senderAddr = fromAddr
+            ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
+            if ans:
+                print('Address matched')
+                # decrypt1.decryptWithPrivateKey()
+            else:
+                print(addr)
+                print("Addresses don't match")
         else:
-            print(addr)
+            input('Please input your password')
 
 
     def sendOnline(self):
