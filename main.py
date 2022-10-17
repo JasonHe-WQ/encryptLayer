@@ -20,7 +20,8 @@ class mailbox():
         self.encryptedMsg = str()
         self.password = bytes()
         """
-        Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter
+        Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter.
+        When using again, please import your private key in HEX to continue your conversation.
         :param ifHadAccount:
         """
         if ifHadAccount is False:
@@ -86,7 +87,7 @@ class mailbox():
         else:
             print("Please make sure your password is encoded as bytes and saved in 'ESAPassword.bin'")
             if password is None:
-                with open('ESAPassword.bin','rb') as f:
+                with open('ESAPassword.bin', 'rb') as f:
                     password = f.read()
             while flag:
                 """
@@ -104,15 +105,13 @@ class mailbox():
                     if ifAgain is None or False:
                         flag = False
 
-
-
-
     def sendOnline(self):
         """
         Not Completed Yet
         :return:
         """
         pass
+
 
 msg = mailbox()
 msg.encryptType = 'ESA'
