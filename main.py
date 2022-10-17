@@ -89,7 +89,7 @@ class mailbox():
             print("Addresses don't match")
             raise ValueError
         if self.encryptType == 'RSA':
-            decrypt1.decryptWithPrivateKey()
+            decrypt1.decryptWithPrivateKey(self.__privateKey)
         else:
             print("Please make sure your password is encoded as bytes and saved in 'ESAPassword.bin'")
             if password is None:
@@ -120,6 +120,6 @@ class mailbox():
 
 
 msg = mailbox()
-msg.encryptType = 'RSA'
+msg.encryptType = 'ESA'
 msg.sign()
 msg.decrypt()
