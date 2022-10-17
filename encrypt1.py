@@ -14,9 +14,7 @@ def signWithPrivateKey(privateKey):
     with open('signature.bin', 'wb') as f:
         f.write(sig)
     with open('rsv.txt', 'w') as f:
-        f.write(str(r))
-        f.write(str(s))
-        f.write(str(v))
+        f.write(str(r) + '\n')
+        f.write(str(s) + '\n')
+        f.write(str(v) + '\n')
 
-
-signWithPrivateKey(0x93ad253e9f5ce913e36706eb147b99652389686f249554ea3cbf51d022c2ee51)
