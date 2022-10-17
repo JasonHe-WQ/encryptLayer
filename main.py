@@ -11,6 +11,8 @@ class mailbox():
         self.__privateKey = 0x0
         self.address = 0x0
         self.signature = bytes()
+        self.ifOnline = False
+        self.encryptType = 'RSA'
         """
         Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter
         :param ifHadAccount:
@@ -32,16 +34,23 @@ class mailbox():
         self.signature = encrypt1.signWithPrivateKey(self.__privateKey)
         print('The Signature has been saved as "signedMessage.bin"')
 
-    def encrypt(self, fromAddr = None):
+    def encrypt(self, fromAddr = None, Type = 'RSA'):
         """
         This method will read the text file named 'data.txt' and generate an encrypted text file named
         'encryptedData.txt' with the receiver's address
-        :return:None
+        :param fromAddr:When the parameter 'Type' is set as RSA, please provide the address of receiver
+        :param Type:'RSA' for default Ethereum encrypt function, 'ESA' for using same password both sides knew
+        :return:
         """
-        if fromAddr is None:
-            fromAddr = self.address
-        self.senderAddr = fromAddr
-        encrypt2.encryptWithPublicKey(self.senderAddr)
+
+        if self.encryptType=='RSA':
+            if fromAddr is None:
+                fromAddr = self.address
+            self.senderAddr = fromAddr
+            encrptedBytes = encrypt2.encryptWithPublicKey(self.senderAddr)
+
+        elif self.encryptType
+
 
     def dycrypt(self, fromAddr = None):
         if fromAddr is None:
@@ -53,6 +62,14 @@ class mailbox():
             # decrypt1.decryptWithPrivateKey()
         else:
             print(addr)
+
+
+    def sendOnline(self):
+        """
+        Not Completed Yet
+        :return:
+        """
+        pass
 
 
 msg = mailbox()
