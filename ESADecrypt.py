@@ -4,5 +4,7 @@ def ESADecrypt(password):
         nonce, tag, ciphertext = [f.read(x) for x in (16, 16, -1)]
     cipher = AES.new(password, AES.MODE_EAX, nonce)
     data = cipher.decrypt_and_verify(ciphertext, tag)
+    with open('text.bin','wb') as f:
+        f.write(data)
     return data
 
