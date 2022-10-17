@@ -7,6 +7,7 @@ from eth_account import Account
 import ESAEncrypt
 import ESADecrypt
 from eth_keys import keys
+from eth_keys import KeyAPI
 
 class mailbox():
     def __init__(self, ifHadAccount=False):
@@ -36,6 +37,8 @@ class mailbox():
             self.address = acct.address
         Keys = keys.PrivateKey(self.__privateKey)
         self.publicKey = Keys.public_key
+        self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
+
 
     def sign(self):
         """
@@ -77,7 +80,8 @@ class mailbox():
         if fromAddr is None:
             fromAddr = self.address
         self.senderAddr = fromAddr
-        ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
+        addr = eval(decrypt2.verify(senderAddr=self.senderAddr))
+        ans = bool(addr==self.senderAddr)
         if ans:
             print('Address matched')
             flag = True
