@@ -6,5 +6,3 @@ def ESADecrypt(password):
     data = cipher.decrypt_and_verify(ciphertext, tag)
     return data
 
-
-print(ESADecrypt(b'\x1b\xea>\xdc\x91b\xe8\x05v\xf7\x8b\xe6]\xa4gk'))
