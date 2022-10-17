@@ -7,6 +7,8 @@ def encryptWithPublicKey(publicKey):
     encryptedData = ecies.encrypt(publicKey,bytes(msg))
     with open('encryptedData.bin','wb') as f:
         f.write(encryptedData)
+    return encryptedData
+
 
 
 
