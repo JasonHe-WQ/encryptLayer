@@ -4,11 +4,11 @@ from eth_account.messages import encode_defunct
 
 
 def verify(senderAddr):
-    f = open('signed_message.bin', 'rb')
+    f = open('signedMessage.bin', 'rb')
     signedMessage = pickle.load(f)
     f.close()
     with open('encrypted.txt', 'r') as f:
         encryptedMsg = f.read()
         Msg = encode_defunct(text=encryptedMsg)
     decryptedAddr = w3.eth.account.recover_message(Msg, signature=signedMessage.signature)
-    return senderAddr == decryptedAddr
+    return senderAddr == decryptedAddr, decryptedAddr

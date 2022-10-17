@@ -40,13 +40,15 @@ class mailbox():
         encrypt2.encryptWithPublicKey()
 
     def dycrypt(self):
-        if decrypt2.verify():
-            pass
+        ans,addr = decrypt2.verify(senderAddr=self.address)
+        if ans:
+            print('Address matched')
             # decrypt1.decryptWithPrivateKey()
         else:
-            raise "ERROR"
+            print(addr)
+
 
 
 msg = mailbox()
-print(msg.address)
-
+msg.sign()
+msg.dycrypt()
