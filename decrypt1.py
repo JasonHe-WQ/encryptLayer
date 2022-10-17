@@ -1,11 +1,12 @@
 # Decrypting with the private key
 import ecies
-
+import ecies.utils
 
 def decryptWithPrivateKey(privateKey):
     with open('encryptedData.bin', "rb") as f:
         encryptedData = f.read()
-    privateKey = bytes(privateKey)
+    privateKey = (privateKey).to_bytes(65,'little')
+    print(type(privateKey))
     data = ecies.decrypt(privateKey, encryptedData)
     with open('text.bin', 'wb') as f:
         f.write(data)
