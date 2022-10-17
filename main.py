@@ -1,6 +1,6 @@
 # import decrypt1
 import encrypt1
-# import encrypt2
+import encrypt2
 # import decrypt2
 import generatePrivateKey
 from eth_account import Account
@@ -23,11 +23,21 @@ class mailbox():
             self.__privateKey = privateKeyInHex
             self.address = acct.address
 
+    def sign(self):
+        """
+        This method will read the encrypted file and generate
+        :return:None
+        """
+        encrypt1.signWithPrivateKey(self.__privateKey)
+        print('The Signature has been saved as "signed_message.bin"')
+
     def encrypt(self):
-        encrypt1.encryptWithPublicKey(self.__privateKey)
-    #
-    # def sign(self):
-    #     encrypt2.signWithPrivateKey()
+        """
+        This method will read the text file named 'data.txt' and generate an encrypted text file named
+        'encryptedData.txt'
+        :return:None
+        """
+        encrypt2.encryptWithPublicKey()
     #
     # def dycrypt(self):
     #     if decrypt2.verify():
