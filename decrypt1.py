@@ -1,6 +1,5 @@
 # Decrypting with the private key
 import ecies
-import ecies.utils
 
 def decryptWithPrivateKey(privateKey):
     with open('encryptedData.bin', "rb") as f:
