@@ -3,19 +3,10 @@ from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.PublicKey import RSA
 
 
-def decryptWithPrivateKey(filePath='encrypted_data.bin', data=None, Type=1):
-    with open("private.pem") as pkFile:
-        pk = pkFile.read()
-    private_key = RSA.import_key(pk)
-    if Type == 1:
-        file_in = open(filePath, "rb")
-    else:
-        file_in = data
+def decryptWithPrivateKey(filePath='encryptedData.bin', Type=1):
 
-    enc_session_key, nonce, tag, ciphertext = \
-        [file_in.read(x) for x in (private_key.size_in_bytes(), 16, 16, -1)]
-
-    file_in.close()
+    with open(filePath, "rb") as f:
+        f.read()
 
     # Decrypt the session key with the private RSA key
     cipher_rsa = PKCS1_OAEP.new(private_key)

@@ -1,4 +1,4 @@
-# import decrypt1
+import decrypt1
 import encrypt1
 import encrypt2
 import decrypt2
@@ -76,7 +76,6 @@ class mailbox():
         :param password: When self.encryptType == 'ESA', please use this parameter
         :return:
         """
-        flag = bool()
         if fromAddr is None:
             fromAddr = self.address
         self.senderAddr = fromAddr
@@ -91,7 +90,7 @@ class mailbox():
             raise ValueError
         if self.encryptType == 'RSA':
             pass
-            # decrypt1.decryptWithPrivateKey()
+            decrypt1.decryptWithPrivateKey()
         else:
             print("Please make sure your password is encoded as bytes and saved in 'ESAPassword.bin'")
             if password is None:
