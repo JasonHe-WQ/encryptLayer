@@ -4,7 +4,8 @@ import ecies
 def decryptWithPrivateKey(privateKey):
     with open('encryptedData.bin', "rb") as f:
         encryptedData = f.read()
-    privateKey = (privateKey).to_bytes(65,'little')
+    privateKey = str(privateKey)
+    print(len(privateKey))
     print(type(privateKey))
     data = ecies.decrypt(privateKey, encryptedData)
     with open('text.bin', 'wb') as f:
@@ -12,4 +13,4 @@ def decryptWithPrivateKey(privateKey):
     print(data)
 
 
-print(decryptWithPrivateKey(0x0f0a9f071c868b2a75a504c29c2f93ceb7464a8f0d9f768abaced69a66d90713))
+# print(decryptWithPrivateKey(0x0f0a9f071c868b2a75a504c29c2f93ceb7464a8f0d9f768abaced69a66d90713))
