@@ -4,6 +4,8 @@ import encrypt2
 import decrypt2
 import generatePrivateKey
 from eth_account import Account
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
 
 
 class mailbox():
@@ -14,6 +16,7 @@ class mailbox():
         self.ifOnline = False
         self.encryptType = 'RSA'
         self.encryptedMsg = str()
+        self.password = bytes()
         """
         Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter
         :param ifHadAccount:
