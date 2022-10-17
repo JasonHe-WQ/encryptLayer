@@ -11,5 +11,4 @@ def signWithPrivateKey(privateKey):
     f = open('signedMessage.bin', 'wb')
     pickle.dump(signedMessage, f)
     f.close()
-    print('Signed')
     return signedMessage.signature
