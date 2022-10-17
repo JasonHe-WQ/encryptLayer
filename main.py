@@ -25,7 +25,7 @@ class mailbox():
 
     def sign(self):
         """
-        This method will read the encrypted file and generate
+        This method will read the encrypted file and generate a signed file name 'signedMessage.bin'
         :return:None
         """
         encrypt1.signWithPrivateKey(self.__privateKey)

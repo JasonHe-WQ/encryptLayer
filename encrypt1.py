@@ -7,8 +7,8 @@ def signWithPrivateKey(privateKey):
     with open('encrypted.txt', 'r') as f:
         msg = f.read()
         message = encode_defunct(text=msg)
-    signed_message = w3.eth.account.sign_message(message, private_key=privateKey)
-    f = open('signed_message.bin', 'wb')
-    pickle.dump(signed_message, f)
+    signedMessage = w3.eth.account.sign_message(message, private_key=privateKey)
+    f = open('signedMessage.bin', 'wb')
+    pickle.dump(signedMessage, f)
     f.close()
     print('Signed')

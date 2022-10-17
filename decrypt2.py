@@ -5,12 +5,8 @@ from Crypto.Hash import SHA256
 
 
 def verify(filepath='sig.bin', fileBeforeSign='encrypted_data.bin'):
-    with open("receiver.pem", 'r') as pubFile:
-        pubKey = pubFile.read()
-    with open(filepath, 'rb') as f:
-        signature = f.read()
-    with open(fileBeforeSign, 'rb') as f:
-        toEncyrpt = f.read()
+    f = open('signed_message.bin','rb')
+    signed_message
     publicKey = RSA.import_key(pubKey)
     hashObj = SHA256.new(toEncyrpt)
     verified = PKCS1_v1_5.new(publicKey)
