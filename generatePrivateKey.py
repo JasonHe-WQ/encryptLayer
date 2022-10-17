@@ -11,3 +11,4 @@ def generate():
     print("Address:", acct.address)
 
     return privateKeyInHex, acct.address
+generate()

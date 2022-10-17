@@ -24,7 +24,7 @@ class mailbox():
             self.address = acct.address
 
     def encrypt(self):
-        encrypt1.encryptWithPublicKey(type,self.__privateKey)
+        encrypt1.encryptWithPublicKey(self.__privateKey)
     #
     # def sign(self):
     #     encrypt2.signWithPrivateKey()
