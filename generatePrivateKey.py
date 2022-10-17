@@ -9,4 +9,3 @@ def generate():
     print(privateKeyInHex +'   Save It And Not Share It')
     print("Address:", acct.address)
     return privateKey, privateKeyInHex, acct.address, acct
-print(generate())
