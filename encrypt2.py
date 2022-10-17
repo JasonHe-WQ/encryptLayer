@@ -4,7 +4,7 @@ import ecies
 def encryptWithPublicKey(publicKey):
     with open('data.txt','r') as f:
         msg = f.read()
-
+    ecies.encrypt(publicKey)
 
 
 

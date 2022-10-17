@@ -22,6 +22,7 @@ class mailbox():
         self.encryptedMsg = str()
         self.password = bytes()
         self.acct = object()
+        self.senderPublicKey = 0x0
         """
         Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter.
         When using again, please import your private key in HEX to continue your conversation.
@@ -48,7 +49,7 @@ class mailbox():
         self.signature = encrypt1.signWithPrivateKey(self.__privateKey)
         print('The Signature has been saved as "signedMessage.bin"')
 
-    def encrypt(self, fromAddr=None, Type='RSA'):
+    def encrypt(self, senderPublicKey=None, Type='RSA'):
         """
         This method will read the text file named 'data.txt' and generate an encrypted text file named
         'encryptedData.txt' with the receiver's address
@@ -58,10 +59,9 @@ class mailbox():
         """
         self.encryptType = Type
         if self.encryptType == 'RSA':
-            if fromAddr is None:
-                fromAddr = self.address
-            self.senderAddr = fromAddr
-            self.encryptedBytes = encrypt2.encryptWithPublicKey(self.publicKey)
+            if senderPublicKey is None:
+                self.senderPublicKey = self.publicKey
+            self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
 
         elif self.encryptType == 'ESA':
             self.password, nonce, tag, self.encryptedBytes = ESAEncrypt.encryptWithPassword()
