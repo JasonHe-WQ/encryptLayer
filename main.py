@@ -13,7 +13,8 @@ class mailbox():
     def __init__(self, ifHadAccount=False):
         self.senderAddr = 0x0
         self.encryptedBytes = bytes()
-        self.__privateKey = 0x0
+        self.__privateKey = bytes()
+        self.__privateKeyInHex = 0x0
         self.address = 0x0
         self.publicKey = 0x0
         self.signature = bytes()
@@ -29,7 +30,7 @@ class mailbox():
         :param ifHadAccount:
         """
         if ifHadAccount is False:
-            self.__privateKey,privateKeyInHex, self.address, self.acct = generatePrivateKey.generate()
+            self.__privateKey,self.__privateKeyInHex, self.address, self.acct = generatePrivateKey.generate()
 
         else:
             privateKeyInHex = input('Please Import Your Private Key In Hex')
@@ -39,6 +40,7 @@ class mailbox():
         Keys = keys.PrivateKey(self.__privateKey)
         self.publicKey = Keys.public_key
         self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
+
 
 
     def sign(self):
@@ -89,7 +91,7 @@ class mailbox():
             print("Addresses don't match")
             raise ValueError
         if self.encryptType == 'RSA':
-            decrypt1.decryptWithPrivateKey(self.__privateKey)
+            decrypt1.decryptWithPrivateKey(self.__privateKeyInHex)
         else:
             print("Please make sure your password is encoded as bytes and saved in 'ESAPassword.bin'")
             if password is None:
