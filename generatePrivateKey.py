@@ -1,13 +1,12 @@
 from eth_account import Account
-import secrets
 
 def generate():
 
 
-    privateKey = secrets.token_bytes(32)
-    privateKeyInHex = '0x' + privateKey.hex()
+    acct = Account.create()
+    privateKey = acct.key
+    privateKeyInHex = privateKey.hex()
     print(privateKeyInHex +'   Save It And Not Share It')
     acct = Account.from_key(privateKey)
     print("Address:", acct.address)
-
-    return privateKeyInHex, acct.address
+    return privateKeyInHex, acct.address, acct
