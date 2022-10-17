@@ -1,7 +1,7 @@
 # import decrypt1
 import encrypt1
 import encrypt2
-# import decrypt2
+import decrypt2
 import generatePrivateKey
 from eth_account import Account
 
@@ -34,16 +34,17 @@ class mailbox():
     def encrypt(self):
         """
         This method will read the text file named 'data.txt' and generate an encrypted text file named
-        'encryptedData.txt'
+        'encryptedData.txt' with the receiver's address
         :return:None
         """
         encrypt2.encryptWithPublicKey()
-    #
-    # def dycrypt(self):
-    #     if decrypt2.verify():
-    #         decrypt1.decryptWithPrivateKey()
-    #     else:
-    #         raise "ERROR"
+
+    def dycrypt(self):
+        if decrypt2.verify():
+            pass
+            # decrypt1.decryptWithPrivateKey()
+        else:
+            raise "ERROR"
 
 
 msg = mailbox()

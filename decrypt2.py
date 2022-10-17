@@ -1,13 +1,14 @@
-# Verifying signature with your private key
-from Crypto.PublicKey import RSA
-from Crypto.Signature import PKCS1_v1_5
-from Crypto.Hash import SHA256
+import pickle
+from web3.auto import w3
+from eth_account.messages import encode_defunct
 
 
-def verify(filepath='sig.bin', fileBeforeSign='encrypted_data.bin'):
-    f = open('signed_message.bin','rb')
-    signed_message
-    publicKey = RSA.import_key(pubKey)
-    hashObj = SHA256.new(toEncyrpt)
-    verified = PKCS1_v1_5.new(publicKey)
-    return verified.verify(hashObj, signature)
+def verify(senderAddr):
+    f = open('signed_message.bin', 'rb')
+    signedMessage = pickle.load(f)
+    f.close()
+    with open('encrypted.txt', 'r') as f:
+        encryptedMsg = f.read()
+        Msg = encode_defunct(text=encryptedMsg)
+    decryptedAddr = w3.eth.account.recover_message(Msg, signature=signedMessage.signature)
+    return senderAddr == decryptedAddr

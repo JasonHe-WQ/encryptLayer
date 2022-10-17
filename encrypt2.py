@@ -4,7 +4,7 @@ from Crypto.Signature import PKCS1_v1_5
 from Crypto.Hash import SHA256
 
 
-def encryptWithPublicKey(filepath='encrypted_data.bin'):
+def encryptWithPublicKey(address):
     with open("private.pem", 'r') as priFile:
         priKey = priFile.read()
     privateKey = RSA.import_key(priKey)
@@ -17,4 +17,4 @@ def encryptWithPublicKey(filepath='encrypted_data.bin'):
         f.write(signature)
 
 
-signWithPrivateKey('encrypted_data.bin')
+
