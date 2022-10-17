@@ -73,7 +73,7 @@ class mailbox():
                 print(addr)
                 print("Addresses don't match")
         else:
-            input('Please input your password')
+            print('Please make sure your password is encoded as bytes and saved in')
 
     def sendOnline(self):
         """

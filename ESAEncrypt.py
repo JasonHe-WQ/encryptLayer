@@ -4,6 +4,8 @@ from Crypto.Util.Padding import pad
 
 def encryptWithPassword():
     key = get_random_bytes(16)
+    with open('ESAPassword.bin','wb') as f:
+        f.write(key)
     cipher = AES.new(key, AES.MODE_EAX)
     with open('data.txt','r') as f:
         msg = f.read().encode('utf-8')
