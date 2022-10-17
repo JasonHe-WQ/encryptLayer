@@ -122,6 +122,6 @@ class mailbox():
 
 
 msg = mailbox()
-msg.encryptType = 'ESA'
+msg.encryptType = 'RSA'
 msg.sign()
 msg.decrypt()
