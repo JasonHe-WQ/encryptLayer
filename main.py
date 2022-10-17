@@ -77,18 +77,29 @@ class mailbox():
         else:
             print(addr)
             print("Addresses don't match")
-        if self.encryptType=='RSA':
+        if self.encryptType == 'RSA':
             pass
             # decrypt1.decryptWithPrivateKey()
         else:
-            if password is None:
-                password = self.password
             print("Please make sure your password is encoded as bytes and saved in 'ESAPassword.bin'")
-            text, verify = ESADecrypt.ESADecrypt(password)
-            if verify is True:
-                print(text)
-            else:
-                print('Password wrong, please try again')
+            if password is None:
+                with open('ESAPassword.bin','rb') as f:
+                    password = f.read()
+            while True:
+                """
+                Note that the code generates a ValueError exception when tampering is detected 
+                or the password doesn't match.
+                """
+                try:
+                    text = ESADecrypt.ESADecrypt(password)
+                    print(text)
+                    break
+                except ValueError:
+                    print('Password Wrong or Tampering Detected')
+                    print('Please Check Again')
+
+
+
 
     def sendOnline(self):
         """
