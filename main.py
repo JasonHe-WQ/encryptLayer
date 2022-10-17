@@ -68,17 +68,18 @@ class mailbox():
         :param password: When self.encryptType == 'ESA', please use this parameter
         :return:
         """
-        if self.encryptType == 'RSA':
-            if fromAddr is None:
-                fromAddr = self.address
-            self.senderAddr = fromAddr
-            ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
-            if ans:
-                print('Address matched')
-                # decrypt1.decryptWithPrivateKey()
-            else:
-                print(addr)
-                print("Addresses don't match")
+        if fromAddr is None:
+            fromAddr = self.address
+        self.senderAddr = fromAddr
+        ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
+        if ans:
+            print('Address matched')
+        else:
+            print(addr)
+            print("Addresses don't match")
+        if self.encryptType=='RSA':
+            pass
+            # decrypt1.decryptWithPrivateKey()
         else:
             if password is None:
                 password = self.password
