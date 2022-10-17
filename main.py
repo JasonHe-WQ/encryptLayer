@@ -27,12 +27,12 @@ class mailbox():
         :param ifHadAccount:
         """
         if ifHadAccount is False:
-            self.__privateKey, self.address, self.acct = generatePrivateKey.generate()
+            self.__privateKey,privateKeyInHex, self.address, self.acct = generatePrivateKey.generate()
 
         else:
             privateKeyInHex = input('Please Import Your Private Key In Hex')
             acct = Account.privateKeyToAccount(privateKeyInHex)
-            self.__privateKey = privateKeyInHex
+            self.__privateKey = acct.Key
             self.address = acct.address
         Keys = keys.PrivateKey(self.__privateKey)
         self.publicKey = Keys.public_key
