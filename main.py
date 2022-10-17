@@ -10,6 +10,7 @@ class mailbox():
     def __init__(self, ifHadAccount=False):
         self.__privateKey = 0x0
         self.address = 0x0
+        self.senderAddr = 0x0
         """
         Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter
         :param ifHadAccount:
@@ -29,7 +30,7 @@ class mailbox():
         :return:None
         """
         encrypt1.signWithPrivateKey(self.__privateKey)
-        print('The Signature has been saved as "signed_message.bin"')
+        print('The Signature has been saved as "signedMessage.bin"')
 
     def encrypt(self):
         """
@@ -39,14 +40,16 @@ class mailbox():
         """
         encrypt2.encryptWithPublicKey()
 
-    def dycrypt(self):
-        ans,addr = decrypt2.verify(senderAddr=self.address)
+    def dycrypt(self, fromAddr = None):
+        if fromAddr is None:
+            fromAddr = self.address
+        self.senderAddr = fromAddr
+        ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
         if ans:
             print('Address matched')
             # decrypt1.decryptWithPrivateKey()
         else:
             print(addr)
-
 
 
 msg = mailbox()
