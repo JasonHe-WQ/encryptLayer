@@ -5,6 +5,7 @@ import decrypt2
 import generatePrivateKey
 from eth_account import Account
 import ESAEncrypt
+import ESADecrypt
 
 
 class mailbox():
@@ -60,7 +61,13 @@ class mailbox():
         else:
             raise 'Error, Not supported encrypt type'
 
-    def decrypt(self, fromAddr=None):
+    def decrypt(self, fromAddr=None, password=None):
+        """
+        This method will decrypt and print the data
+        :param fromAddr: When self.encryptType == 'RSA', please use this parameter
+        :param password: When self.encryptType == 'ESA', please use this parameter
+        :return:
+        """
         if self.encryptType == 'RSA':
             if fromAddr is None:
                 fromAddr = self.address
@@ -73,7 +80,14 @@ class mailbox():
                 print(addr)
                 print("Addresses don't match")
         else:
-            print('Please make sure your password is encoded as bytes and saved in')
+            if password is None:
+                password = self.password
+            print("Please make sure your password is encoded as bytes and saved in 'ESAPassword.bin'")
+            text, verify = ESADecrypt.ESADecrypt(password)
+            if verify is True:
+                print(text)
+            else:
+                print('Password wrong, please try again')
 
     def sendOnline(self):
         """
