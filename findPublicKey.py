@@ -20,31 +20,33 @@ myToken = {
     '42161': '6XIWP1HZR51JEMWPW31CQTPMSVQRRPS26U',
     '10': '7G41Q95JB979VKNDE6B7Z5APEWKK11Y644',
     '1313161554': 'VK1X8E2VN3H7SBDFFZQV4WPSIMWAAF3J49',
-    '1284': 'TI8XRUGJBMGWDZ13DNG6EIV58WUD1EP698'
+    '1284': 'BIV283PS7UZ87FHET11GH9N3PV13IVYBM5'
 
 
 }
 
 
 def find(addr):
-    chainIDList = ['1', '56', '43114', '137', '42161', '10']
-    chainID = '1284'
-    addr = hex(addr)
+    chainIDList = ['1', '56', '43114', '137', '42161', '10', '1313161554', '1284']
     tx = int()
-    url = '{}/api?module=account' \
-          '&action=txlist' \
-          '&address={}&startblock=0&' \
-          'endblock=99999999' \
-          '&page=1' \
-          '&offset=1' \
-          '&sort=desc&apikey={}'.format(explorer[chainID], str(addr), myToken[chainID])
-    print(requests.get(url))
-    try:
-        data = requests.get(url).json()
-        tx = data['result'][0]['hash']
-    except IndexError:
-        print('No TX yet, please change the address or provide the public key')
-        return 0
+    addr = hex(addr)
+    for chainID in chainIDList:
+        url = '{}/api?module=account' \
+              '&action=txlist' \
+              '&address={}&startblock=0&' \
+              'endblock=99999999' \
+              '&page=1' \
+              '&offset=1' \
+              '&sort=desc&apikey={}'.format(explorer[chainID], str(addr), myToken[chainID])
+        print(url)
+        print(requests.get(url))
+        try:
+            data = requests.get(url).json()
+            print(data)
+            tx = data['result'][0]['hash']
+        except IndexError:
+            print('No TX yet, please change the address or provide the public key')
+            return 0
     return tx
 
 
