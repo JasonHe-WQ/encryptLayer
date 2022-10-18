@@ -41,7 +41,7 @@ class mailbox():
             self.address = acct.address
         Keys = keys.PrivateKey(self.__privateKey)
         self.publicKey = Keys.public_key
-        # publicKey and privateKey are stored as '0x' and will be use as str hex and not stored in any file.
+        # publicKey and privateKey are stored as '0x' and will be use as str hex and stored in 'privateKeyInHex.txt'.
         self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
 
     def sign(self):
