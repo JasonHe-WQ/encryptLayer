@@ -49,7 +49,7 @@ def find(addr):
     outputDict = output.json()['data']
     txHash, r, s, v = (outputDict['hash']), (outputDict['r']), (outputDict['s']), outputDict['v']
     print(txHash, r, s, v)
-    # publicKey = Account.recoverHash(txHash, (r, s, v))
+    publicKey = Account.recoverHash(txHash, (r, s, v))
     # for chainID in chainIDList:
     #     url = '{}/api?module=account' \
     #           '&action=txlist' \
