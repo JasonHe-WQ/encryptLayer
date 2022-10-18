@@ -3,7 +3,6 @@ import encrypt1
 import encrypt2
 import decrypt2
 import generatePrivateKey
-import checkIfTransacted
 import findPublicKey
 from eth_account import Account
 import ESAEncrypt
