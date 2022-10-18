@@ -49,7 +49,6 @@ def find(addr):
                 pass
             else:
                 print('Please make sure you are online, you are disconnected from {}'.format(chainID))
-        continue
     if tx == 0:
         return 0
     else:
