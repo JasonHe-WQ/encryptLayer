@@ -28,7 +28,7 @@ class mailbox():
         self.acct = object()
         self.senderPublicKey = 0x0
         """
-        Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter.
+        Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter and A str in file.
         When using again, please import your private key in HEX to continue your conversation.
         :param ifHadAccount:
         """
