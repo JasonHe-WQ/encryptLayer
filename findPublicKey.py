@@ -39,12 +39,13 @@ def find(addr):
     #       '&page=1&offset=1&sort=asc' \
     #       '&apikey=BIV283PS7UZ87FHET11GH9N3PV13IVYBM5'.format(addr)
 
-    url = 'https://crab.api.subscan.io/api/scan/evm/transaction'
+    url = 'https://moonbeam.api.subscan.io/api/scan/evm/transaction'
     dataHeader = {'Content-Type': 'application/json',
                   'X-API-Key': 'e41dbb7261e9468aa4cd0d1b9824eeea'}
     dataRaw = {"hash": "0x9490f7b32be859f93f688100f3cb58a9d7daabddd75f1a21b7591e124dd9b1df"}
     output = requests.post(url, data=json.dumps(dataRaw), headers=dataHeader)
-    print(output.content)
+    outputDict = output.json()['data']
+    print(outputDict['hash'])
     # for chainID in chainIDList:
     #     url = '{}/api?module=account' \
     #           '&action=txlist' \
