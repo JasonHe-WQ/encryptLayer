@@ -15,15 +15,17 @@ httpNodeDictionary = {'Ethereum': ['https://eth-mainnet.public.blastapi.io',
                                       'https://1rpc.io/avax/c',
                                       'https://api.avax.network/ext/bc/C/rpc',
                                       'https://avaIancheapi.terminet.io/ext/bc/C/rpc'],
-                      'Polygon': ['https://polygon-bor.publicnod.com',
-                                  'https://polygon-mainnet-public.unifra.io',
-                                  'https://rpc.ank.com/polygon',
-                                  'https://polygon-mainnet.public.blastapi.io',
-                                  'https://polygon-rp.com'],
+                      'Polygon': ['https://poly-rpc.gateway.pokt.network',
+                                  'https://1rpc.io/matic',
+                                  'https://polygonapi.terminet.io/rpc',
+                                  'https://rpc-mainnet.matic.quiknode.pro',
+                                  'https://polygon-mainnet-public.unifra.io'],
                       'Arbitrum': ['https://1rpc.io/arb',
                                    'https://arb1.arbitrum.io/rpc',
                                    'https://rpc.ankr.com/arbitrum'],
-                      'Optimism': []}
+                      'Optimism': ['https://1rpc.io/op',
+                                   'https://mainnet.optimism.io',
+                                   'https://rpc.ankr.com/optimism']}
 
 
 def check(addr):
