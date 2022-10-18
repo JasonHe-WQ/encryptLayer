@@ -6,7 +6,9 @@ explorer = {
     '43114': 'https://api.snowtrace.io',
     '137': 'https://api.polygonscan.com',
     '42161': 'https://api.arbiscan.io',
-    '10': 'https://api-optimistic.etherscan.io'
+    '10': 'https://api-optimistic.etherscan.io',
+    '1313161554': 'https://api.aurorascan.dev/',
+    '1284': 'https://api-moonbeam.moonscan.io/'
 
 }
 
@@ -16,14 +18,17 @@ myToken = {
     '43114': 'H13WYPR9C7XV411NK9BGVP8C7KH7V4BPNZ',
     '137': '2KTHMFT4CIZ9WDIQWQIK9ESD7I9T1VCG5Q',
     '42161': '6XIWP1HZR51JEMWPW31CQTPMSVQRRPS26U',
-    '10': '7G41Q95JB979VKNDE6B7Z5APEWKK11Y644'
+    '10': '7G41Q95JB979VKNDE6B7Z5APEWKK11Y644',
+    '1313161554': 'VK1X8E2VN3H7SBDFFZQV4WPSIMWAAF3J49',
+    '1284': 'TI8XRUGJBMGWDZ13DNG6EIV58WUD1EP698'
+
 
 }
 
 
 def find(addr):
     chainIDList = ['1', '56', '43114', '137', '42161', '10']
-    chainID = '56'
+    chainID = '10'
     addr = hex(addr)
     tx = int()
     url = '{}/api?module=account' \
