@@ -7,8 +7,8 @@ explorer = {
     '137': 'https://api.polygonscan.com',
     '42161': 'https://api.arbiscan.io',
     '10': 'https://api-optimistic.etherscan.io',
-    '1313161554': 'https://api.aurorascan.dev/',
-    '1284': 'https://api-moonbeam.moonscan.io/'
+    '1313161554': 'https://api.aurorascan.dev',
+    '1284': 'https://api-moonbeam.moonscan.io'
 
 }
 
@@ -28,7 +28,7 @@ myToken = {
 
 def find(addr):
     chainIDList = ['1', '56', '43114', '137', '42161', '10']
-    chainID = '10'
+    chainID = '1284'
     addr = hex(addr)
     tx = int()
     url = '{}/api?module=account' \
