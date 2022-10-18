@@ -6,9 +6,16 @@ httpNodeDictionary = {'Ethereum': ['https://eth-mainnet.public.blastapi.io',
                                    'https://rpc.ankr.com/eth',
                                    'https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79',
                                    'https://eth-mainnet-public.unifra.io'],
-                      'BNB': [],
+                      'BNB': ['https://rpc-bsc.bnb48.club',
+                              'https://bsc-dataseed1.defibit.io',
+                              'https://bsc-dataseed1.ninicoin.io',
+                              'https://rpc.ankr.com/bsc',
+                              'https://bsc.mytokenpocket.vip'],
+                      'Avalanche-C': ['https://rpc.ankr.com/avalanche',
+                                      'https://1rpc.io/avax/c',
+                                      'https://api.avax.network/ext/bc/C/rpc',
+                                      'https://avaIancheapi.terminet.io/ext/bc/C/rpc'],
                       'Polygon': [],
-                      'Avalanche-C': [],
                       'Arbitrum': [],
                       'Optimism': []}
 
@@ -25,7 +32,7 @@ def check(addr):
                 w3 = Web3(Web3.HTTPProvider(sigleHTTP))
                 if w3.isConnected():
                     break
-            hasValue = bool(Web3.eth.get_balance(addr))
-            if hasValue:
-                return True, key
+                hasValue = bool(Web3.eth.get_balance(addr))
+            # if hasValue:
+            #     return True, key
         return False
