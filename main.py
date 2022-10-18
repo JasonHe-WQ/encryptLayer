@@ -87,8 +87,7 @@ class mailbox():
         if fromAddr is None:
             fromAddr = self.address
         self.senderAddr = fromAddr
-        addr = eval(decrypt2.verify(senderAddr=self.senderAddr))
-        ans = bool(addr == self.senderAddr)
+        ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
         if ans:
             print('Address matched')
             flag = True

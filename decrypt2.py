@@ -11,4 +11,4 @@ def verify(senderAddr):
         encryptedMsg = f.read()
         Msg = encode_defunct(text=encryptedMsg)
     decryptedAddr = w3.eth.account.recover_message(Msg, signature=signedMessage.signature)
-    return decryptedAddr
+    return eval(senderAddr) == eval(decryptedAddr), decryptedAddr
