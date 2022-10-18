@@ -2,29 +2,26 @@ import web3
 from web3 import Web3
 
 httpNodeDictionary = {
-                      'Ethereum': ['https://eth-mainnet.public.blastapi.io',
+                      '1': ['https://eth-mainnet.public.blastapi.io',
                                    'https://rpc.ankr.com/eth',
                                    'https://eth-rpc.gateway.pokt.network',
                                    'https://eth-mainnet-public.unifra.io'],
-                      'BNB': ['https://bsc-dataseed3.defibit.io',
+                      '56': ['https://bsc-dataseed3.defibit.io',
                               'https://bsc-dataseed2.defibit.io',
                               'https://bsc-dataseed1.defibit.io',
                               'https://bsc-dataseed1.ninicoin.io',
                               'https://bsc.mytokenpocket.vip'],
-                      'Avalanche-C': ['https://rpc.ankr.com/avalanche',
+                      '43114': ['https://rpc.ankr.com/avalanche',
                                       'https://1rpc.io/avax/c',
                                       'https://api.avax.network/ext/bc/C/rpc'],
-                      'Polygon': ['https://poly-rpc.gateway.pokt.network',
+                      '137': ['https://poly-rpc.gateway.pokt.network',
                                   'https://1rpc.io/matic',
                                   'https://polygonapi.terminet.io/rpc',
                                   'https://rpc-mainnet.matic.quiknode.pro',
                                   'https://polygon-mainnet-public.unifra.io'],
-                      'Arbitrum': ['https://1rpc.io/arb',
+                      '42161': ['https://1rpc.io/arb',
                                    'https://arb1.arbitrum.io/rpc',
-                                   'https://rpc.ankr.com/arbitrum'],
-                      'Optimism': ['https://1rpc.io/op',
-                                   'https://mainnet.optimism.io',
-                                   'https://rpc.ankr.com/optimism']}
+                                   'https://rpc.ankr.com/arbitrum']}
 
 
 def check(addr):
@@ -49,3 +46,5 @@ def check(addr):
             if hasValue:
                 return True, key
         return False, None
+
+check(0x5568BC7EebC605A88e247769c4acA92d95BC9360)
