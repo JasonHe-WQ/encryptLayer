@@ -17,13 +17,15 @@ def check(addr):
     ans = False
     isConnected = False
     hasValue = False
-    while not isConnected:
+    while not hasValue:
         for key in httpNodeDictionary.keys():
             httpList = list(httpNodeDictionary[key])
             for i in range(len(httpList)):
                 sigleHTTP = httpList[i]
                 w3 = Web3(Web3.HTTPProvider(sigleHTTP))
-                isConnected = w3.isConnected()
-                hasValue = Web3.eth.get_balance(addr)
-
-    return ans
+                if w3.isConnected():
+                    break
+            hasValue = bool(Web3.eth.get_balance(addr))
+            if hasValue:
+                return True
+        return False
