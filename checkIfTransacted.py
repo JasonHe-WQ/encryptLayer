@@ -1,4 +1,3 @@
-import web3
 from web3 import Web3
 
 httpNodeDictionary = {
@@ -28,7 +27,7 @@ def check(addr):
     isConnected = False
     hasValue = False
     w3 = object()
-    sigleHTTP = str()
+    singleHTTP = str()
     addr = str(hex(addr))
     checksum_address = Web3.toChecksumAddress(addr)
     print(addr)
@@ -36,15 +35,14 @@ def check(addr):
         for key in httpNodeDictionary.keys():
             httpList = list(httpNodeDictionary[key])
             for i in range(len(httpList)):
-                sigleHTTP = httpList[i]
-                w3 = Web3(Web3.HTTPProvider(sigleHTTP))
+                singleHTTP = httpList[i]
+                w3 = Web3(Web3.HTTPProvider(singleHTTP))
                 isConnected = w3.isConnected()
                 if isConnected:
                     break
             hasValue = bool(w3.eth.get_balance(checksum_address))
-            print(key,sigleHTTP,hasValue)
+            print(key,singleHTTP,hasValue)
             if hasValue:
                 return True, key
         return False, None
-
 check(0x5568BC7EebC605A88e247769c4acA92d95BC9360)
