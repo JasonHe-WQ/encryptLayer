@@ -37,16 +37,14 @@ class mailbox():
         else:
             privateKeyInHex = input('Please Import Your Private Key In Hex')
             acct = Account.privateKeyToAccount(privateKeyInHex)
-            self.__privateKey = acct.Key
+            self.__privateKey = acct.key
             self.address = acct.address
+            self.__privateKeyInHex = privateKeyInHex
         Keys = keys.PrivateKey(self.__privateKey)
         self.publicKey = Keys.public_key
+        print(self.publicKey)
         # publicKey and privateKey are stored as '0x' and will be use as str hex and stored in 'privateKeyInHex.txt'.
         self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
-        print(type(self.senderPublicKey))
-        print(type(self.senderAddr))
-        print(type(self.publicKey))
-        print(type(self.address))
 
     def sign(self):
         """
@@ -139,7 +137,7 @@ class mailbox():
         """
 
 
-msg = mailbox()
+msg = mailbox(True)
 msg.encryptType = 'ESA'
 msg.encrypt()
 msg.sign()

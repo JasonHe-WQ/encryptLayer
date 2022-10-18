@@ -50,6 +50,7 @@ def find(addr):
     txHash, r, s, v = (outputDict['hash']), (outputDict['r']), (outputDict['s']), outputDict['v']
     publicKey = Account.recoverHash(txHash, (v, r, s))
     print(publicKey)
+
     # for chainID in chainIDList:
     #     url = '{}/api?module=account' \
     #           '&action=txlist' \
@@ -79,4 +80,3 @@ def find(addr):
     #         return publicKey
 
 
-print(find(0xf9ce785a5a9cd8c2ee233064a0a28ae570c33857))
