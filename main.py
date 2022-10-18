@@ -68,7 +68,7 @@ class mailbox():
                 if senderPublicKey is None:
                     self.senderPublicKey = self.publicKey
             else:
-                self.senderPublicKey, flag = checkIfTransacted.check()
+                self.senderPublicKey, flag = checkIfTransacted.check(self.senderAddr)
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
 
         elif self.encryptType == 'ESA':
@@ -127,7 +127,7 @@ class mailbox():
 
 
 msg = mailbox()
-msg.encryptType = 'RSA'
+msg.encryptType = 'ESA'
 msg.encrypt()
 msg.sign()
 msg.decrypt()
