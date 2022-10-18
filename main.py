@@ -75,7 +75,7 @@ class mailbox():
                 """
                 If the sender has made any tx, you can get the public key. Else, you can only send message to
                 who revealed the public key.
-                Network support: Ethereum, BNB, Avalanche, polygon, ArbitrumOne, Optimism, Moonbeam, Aurora
+                Network support: Only Moonbeam!!!
                 """
                 self.senderPublicKey = findPublicKey.find(self.senderAddr)
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
@@ -126,7 +126,6 @@ class mailbox():
                     ifAgain = input('Another Try?')
                     if ifAgain is None or False:
                         flag = False
-        print('',type(self.senderPublicKey))
 
     def sendOnline(self, permanent):
         if permanent is True:

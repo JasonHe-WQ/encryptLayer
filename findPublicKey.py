@@ -30,33 +30,33 @@ def find(addr):
     chainIDList = ['1', '56', '43114', '137', '42161', '10', '1313161554', '1284']
     tx = int()
     addr = hex(addr)
-    for chainID in chainIDList:
-        url = '{}/api?module=account' \
-              '&action=txlist' \
-              '&address={}&startblock=0&' \
-              'endblock=99999999' \
-              '&page=1' \
-              '&offset=1' \
-              '&sort=desc&apikey={}'.format(explorer[chainID], str(addr), myToken[chainID])
-        print(url)
-        print(requests.get(url))
-        try:
-            data = requests.get(url).json()
-            tx = data['result'][0]['hash']
-        except Exception as e:
-            if type(e) == IndexError and chainID == chainIDList[-1]:
-                print('No TX yet, please change another address')
-            elif type(e) == IndexError:
-                pass
-            else:
-                print('Please make sure you are online, you are disconnected from {}'.format(chainID))
-        if tx == 0 and chainID == chainIDList[-1]:
-            return 0
-        elif tx == 0:
-            continue
-        else:
-            publicKey = Account.recover_message(tx)
-            return publicKey
+    # for chainID in chainIDList:
+    #     url = '{}/api?module=account' \
+    #           '&action=txlist' \
+    #           '&address={}&startblock=0&' \
+    #           'endblock=99999999' \
+    #           '&page=1' \
+    #           '&offset=1' \
+    #           '&sort=desc&apikey={}'.format(explorer[chainID], str(addr), myToken[chainID])
+    #     print(url)
+    #     print(requests.get(url))
+    #     try:
+    #         data = requests.get(url).json()
+    #         tx = data['result'][0]['hash']
+    #     except Exception as e:
+    #         if type(e) == IndexError and chainID == chainIDList[-1]:
+    #             print('No TX yet, please change another address')
+    #         elif type(e) == IndexError:
+    #             pass
+    #         else:
+    #             print('Please make sure you are online, you are disconnected from {}'.format(chainID))
+    #     if tx == 0 and chainID == chainIDList[-1]:
+    #         return 0
+    #     elif tx == 0:
+    #         continue
+    #     else:
+    #         publicKey = Account.recover_message(tx)
+    #         return publicKey
 
 
-print(find(0x5568BC7EebC605A88e247769c4acA92d95BC9360))
+# print(find(0x5568BC7EebC605A88e247769c4acA92d95BC9360))
