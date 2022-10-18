@@ -70,6 +70,10 @@ class mailbox():
                     self.senderPublicKey = self.publicKey
             else:
                 flag, chainName = checkIfTransacted.check(self.senderAddr)
+                """
+                If the sender has made any tx, you can get the public key. Else, you can only send message to
+                who revealed the public key.
+                """
                 if flag is True:
                     self.senderPublicKey = findPublicKey.find(self.senderAddr)
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
