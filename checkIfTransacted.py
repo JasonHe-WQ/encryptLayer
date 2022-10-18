@@ -2,5 +2,5 @@ import web3
 
 
 def check(addr):
-    ans = bool()
+    ans = False
     return ans
