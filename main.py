@@ -52,7 +52,7 @@ class mailbox():
         self.signature = encrypt1.signWithPrivateKey(self.__privateKey)
         print('The Signature has been saved as "signedMessage.bin"')
 
-    def encrypt(self, senderPublicKey=None, fromAddr = None, Type='RSA'):
+    def encrypt(self, senderPublicKey=None, fromAddr=None, Type='RSA'):
         """
         This method will read the text file named 'data.txt' and generate an encrypted text file named
         'encryptedData.txt' with the receiver's address
@@ -68,7 +68,7 @@ class mailbox():
                 if senderPublicKey is None:
                     self.senderPublicKey = self.publicKey
             else:
-
+                self.senderPublicKey, flag = checkIfTransacted.check()
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
 
         elif self.encryptType == 'ESA':
