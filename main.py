@@ -63,7 +63,7 @@ class mailbox():
         """
         self.encryptType = Type
         if self.encryptType == 'RSA':
-            if senderPublicKey is None:
+            if senderPublicKey is None and fromAddr is None:
                 self.senderPublicKey = self.publicKey
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
 
