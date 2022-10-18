@@ -4,6 +4,7 @@ import encrypt2
 import decrypt2
 import generatePrivateKey
 import checkIfTransacted
+import findPublicKey
 from eth_account import Account
 import ESAEncrypt
 import ESADecrypt
@@ -69,6 +70,8 @@ class mailbox():
                     self.senderPublicKey = self.publicKey
             else:
                 flag = checkIfTransacted.check(self.senderAddr)
+                if flag is True:
+                    self.senderPublicKey = findPublicKey.find(self.senderAddr)
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
 
         elif self.encryptType == 'ESA':
