@@ -45,4 +45,3 @@ def check(addr):
             if hasValue:
                 return True, key
         return False, None
-check(0x5568BC7EebC605A88e247769c4acA92d95BC9360)
