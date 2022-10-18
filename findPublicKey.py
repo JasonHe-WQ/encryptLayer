@@ -3,7 +3,7 @@ import requests
 explorer = {
     '1': 'https://api.etherscan.io',
     '56':'https://api.bscscan.com/',
-    '43114':'https://snowtrace.io',
+    '43114':'https://api.snowtrace.io',
     '137':'https://polygonscan.com',
     '42161':'https://arbiscan.io'
 
@@ -12,7 +12,7 @@ explorer = {
 myToken = {
     '1': 'VYDCJ3TMWJKTS1FRXVHEWQRSZE6D8HRWI9',
     '56':'5QXV3MKW67M4S53WHFDFQ9DUUSSN8RW1GI',
-    '43114':'https://snowtrace.io',
+    '43114':'H13WYPR9C7XV411NK9BGVP8C7KH7V4BPNZ',
     '137':'https://polygonscan.com',
     '42161':'https://arbiscan.io'
 
