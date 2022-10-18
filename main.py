@@ -125,7 +125,7 @@ class mailbox():
                     if ifAgain is None or False:
                         flag = False
 
-    def sendOnline(self):
+    def sendOnline(self, permanent):
         """
         Not Completed Yet
         :return:
