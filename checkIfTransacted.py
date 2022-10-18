@@ -32,6 +32,8 @@ def check(addr):
     ans = False
     isConnected = False
     hasValue = False
+    addr = str(hex(addr))
+    print(addr)
     while not hasValue:
         for key in httpNodeDictionary.keys():
             httpList = list(httpNodeDictionary[key])
@@ -40,7 +42,9 @@ def check(addr):
                 w3 = Web3(Web3.HTTPProvider(sigleHTTP))
                 if w3.isConnected():
                     break
-                hasValue = bool(Web3.eth.get_balance(addr))
+                hasValue = bool(w3.eth.get_balance(addr))
+                print(key,sigleHTTP,hasValue)
             # if hasValue:
             #     return True, key
         return False
+check(0x5568BC7EebC605A88e247769c4acA92d95BC9360)
