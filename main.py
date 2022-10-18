@@ -51,10 +51,12 @@ class mailbox():
         self.signature = encrypt1.signWithPrivateKey(self.__privateKey)
         print('The Signature has been saved as "signedMessage.bin"')
 
-    def encrypt(self, senderPublicKey=None, Type='RSA'):
+    def encrypt(self, senderPublicKey=None, fromAddr = None, Type='RSA'):
         """
         This method will read the text file named 'data.txt' and generate an encrypted text file named
         'encryptedData.txt' with the receiver's address
+        :param senderPublicKey:When the parameter 'Type' is set as RSA and transactions hash can't be found on chain,
+         please provide the senderPublicKey of receiver
         :param fromAddr:When the parameter 'Type' is set as RSA, please provide the address of receiver
         :param Type:'RSA' for default Ethereum encrypt function, 'ESA' for using same password both sides knew
         :return:
