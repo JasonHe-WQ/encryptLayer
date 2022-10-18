@@ -3,6 +3,7 @@ import encrypt1
 import encrypt2
 import decrypt2
 import generatePrivateKey
+import checkIfTransacted
 from eth_account import Account
 import ESAEncrypt
 import ESADecrypt
@@ -63,8 +64,11 @@ class mailbox():
         """
         self.encryptType = Type
         if self.encryptType == 'RSA':
-            if senderPublicKey is None and fromAddr is None:
-                self.senderPublicKey = self.publicKey
+            if fromAddr is None:
+                if senderPublicKey is None:
+                    self.senderPublicKey = self.publicKey
+            else:
+
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
 
         elif self.encryptType == 'ESA':
