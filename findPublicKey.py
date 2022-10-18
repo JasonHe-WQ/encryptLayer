@@ -17,7 +17,7 @@ myToken = {
     '42161':'https://arbiscan.io'
 
 }
-def find(chainID, addr):
+def find(addr):
     addr = hex(addr)
     url = '{}/api?module=account' \
           '&action=txlist' \
