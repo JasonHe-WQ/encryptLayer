@@ -15,9 +15,9 @@ class mailbox():
         self.senderAddr = 0x0
         self.encryptedBytes = bytes()
         self.__privateKey = bytes()
-        self.__privateKeyInHex = 0x0
+        self.__privateKeyInHex = str()
         self.address = 0x0
-        self.publicKey = 0x0
+        self.publicKey = str()
         self.signature = bytes()
         self.ifOnline = False
         self.encryptType = 'RSA'
