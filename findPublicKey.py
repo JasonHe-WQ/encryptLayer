@@ -2,6 +2,7 @@ import requests
 from eth_account import Account
 import json
 
+
 #
 # explorer = {
 #     '1': 'https://api.etherscan.io',
@@ -44,8 +45,11 @@ def find(addr):
                   'X-API-Key': 'e41dbb7261e9468aa4cd0d1b9824eeea'}
     dataRaw = {"hash": "0x9490f7b32be859f93f688100f3cb58a9d7daabddd75f1a21b7591e124dd9b1df"}
     output = requests.post(url, data=json.dumps(dataRaw), headers=dataHeader)
+    print(output.json())
     outputDict = output.json()['data']
-    print(outputDict['hash'])
+    txHash, r, s, v = (outputDict['hash']), (outputDict['r']), (outputDict['s']), outputDict['v']
+    print(type(txHash), type(r), type(s), type(v))
+    publicKey = Account.recoverHash(txHash, (r, s, v))
     # for chainID in chainIDList:
     #     url = '{}/api?module=account' \
     #           '&action=txlist' \
