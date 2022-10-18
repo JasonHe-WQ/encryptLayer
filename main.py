@@ -126,11 +126,15 @@ class mailbox():
                         flag = False
 
     def sendOnline(self, permanent):
+        if permanent is True:
+            pass
+        else:
+            print("This message will be stored on a centralize server for 7 days.")
+            pass
         """
         Not Completed Yet
         :return:
         """
-        pass
 
 
 msg = mailbox()
