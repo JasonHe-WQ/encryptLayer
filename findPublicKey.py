@@ -1,4 +1,5 @@
 import requests
+from eth_account import Account
 
 explorer = {
     '1': 'https://api.etherscan.io',
@@ -49,10 +50,13 @@ def find(addr):
                 pass
             else:
                 print('Please make sure you are online, you are disconnected from {}'.format(chainID))
-    if tx == 0:
-        return 0
-    else:
-        return 1
+        if tx == 0 and chainID == chainIDList[-1]:
+            return 0
+        elif tx == 0:
+            continue
+        else:
+            publicKey = Account.recover_message(tx)
+            return publicKey
 
 
-print(find(0x930dffa43d19fD3420724C86CF3A6065D4Db5ac7))
+print(find(0x5568BC7EebC605A88e247769c4acA92d95BC9360))
