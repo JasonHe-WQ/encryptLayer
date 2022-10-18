@@ -40,8 +40,7 @@ def find(addr):
     except IndexError:
         print('No TX yet, please change the address or provide the public key')
         return 0
-    print(type(tx))
-    return url
+    return tx
 
 
 print(find(0x5568BC7EebC605A88e247769c4acA92d95BC9360))
