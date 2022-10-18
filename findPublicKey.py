@@ -22,7 +22,6 @@ myToken = {
     '1313161554': 'VK1X8E2VN3H7SBDFFZQV4WPSIMWAAF3J49',
     '1284': 'BIV283PS7UZ87FHET11GH9N3PV13IVYBM5'
 
-
 }
 
 
@@ -42,12 +41,19 @@ def find(addr):
         print(requests.get(url))
         try:
             data = requests.get(url).json()
-            print(data)
             tx = data['result'][0]['hash']
-        except IndexError:
-            print('No TX yet, please change the address or provide the public key')
-            return 0
-    return tx
+        except Exception as e:
+            if type(e) == IndexError and chainID == chainIDList[-1]:
+                print('No TX yet, please change another address')
+            elif type(e) == IndexError:
+                pass
+            else:
+                print('Please make sure you are online, you are disconnected from {}'.format(chainID))
+        continue
+    if tx == 0:
+        return 0
+    else:
+        return 1
 
 
-print(find(0x5568BC7EebC605A88e247769c4acA92d95BC9360))
+print(find(0x930dffa43d19fD3420724C86CF3A6065D4Db5ac7))

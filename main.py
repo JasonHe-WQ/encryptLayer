@@ -44,6 +44,10 @@ class mailbox():
         self.publicKey = Keys.public_key
         # publicKey and privateKey are stored as '0x' and will be use as str hex and stored in 'privateKeyInHex.txt'.
         self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
+        print(type(self.senderPublicKey))
+        print(type(self.senderAddr))
+        print(type(self.publicKey))
+        print(type(self.address))
 
     def sign(self):
         """
@@ -123,6 +127,7 @@ class mailbox():
                     ifAgain = input('Another Try?')
                     if ifAgain is None or False:
                         flag = False
+        print('',type(self.senderPublicKey))
 
     def sendOnline(self, permanent):
         if permanent is True:
