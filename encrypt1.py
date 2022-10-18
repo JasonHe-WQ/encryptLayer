@@ -3,6 +3,7 @@ from web3.auto import w3
 from eth_account.messages import encode_defunct
 import pickle
 
+
 def signWithPrivateKey(privateKey):
     with open('encrypted.txt', 'r') as f:
         msg = f.read()
