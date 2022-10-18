@@ -72,6 +72,7 @@ class mailbox():
                 """
                 If the sender has made any tx, you can get the public key. Else, you can only send message to
                 who revealed the public key.
+                Network support: Ethereum, BNB, Avalanche, polygon, ArbitrumOne, Optimism, Moonbeam, Aurora
                 """
                 self.senderPublicKey = findPublicKey.find(self.senderAddr)
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
