@@ -9,6 +9,7 @@ import ESADecrypt
 from eth_keys import keys
 from eth_keys import KeyAPI
 
+
 class mailbox():
     def __init__(self, ifHadAccount=False):
         self.senderAddr = 0x0
@@ -30,7 +31,7 @@ class mailbox():
         :param ifHadAccount:
         """
         if ifHadAccount is False:
-            self.__privateKey,self.__privateKeyInHex, self.address, self.acct = generatePrivateKey.generate()
+            self.__privateKey, self.__privateKeyInHex, self.address, self.acct = generatePrivateKey.generate()
 
         else:
             privateKeyInHex = input('Please Import Your Private Key In Hex')
@@ -41,8 +42,6 @@ class mailbox():
         self.publicKey = Keys.public_key
         # publicKey and privateKey are stored as '0x' and will be use as str hex
         self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
-
-
 
     def sign(self):
         """
@@ -83,7 +82,7 @@ class mailbox():
             fromAddr = self.address
         self.senderAddr = fromAddr
         addr = eval(decrypt2.verify(senderAddr=self.senderAddr))
-        ans = bool(addr==self.senderAddr)
+        ans = bool(addr == self.senderAddr)
         if ans:
             print('Address matched')
             flag = True
