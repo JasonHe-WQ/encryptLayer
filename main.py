@@ -69,7 +69,7 @@ class mailbox():
                 if senderPublicKey is None:
                     self.senderPublicKey = self.publicKey
             else:
-                flag = checkIfTransacted.check(self.senderAddr)
+                flag, chainName = checkIfTransacted.check(self.senderAddr)
                 if flag is True:
                     self.senderPublicKey = findPublicKey.find(self.senderAddr)
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)

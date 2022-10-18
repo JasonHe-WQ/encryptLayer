@@ -1,20 +1,19 @@
 import web3
 from web3 import Web3
 
-httpNodeDictionary = {'Ethereum': ['https://eth-mainnet.public.blastapi.io',
-                                   'https://api.securerpc.com/v1',
-                                   'https://rpc.ankr.com/eth',
-                                   'https://eth-rpc.gateway.pokt.network',
-                                   'https://eth-mainnet-public.unifra.io'],
-                      'BNB': ['https://bsc-dataseed3.defibit.io',
-                              'https://bsc-dataseed2.defibit.io',
-                              'https://bsc-dataseed1.defibit.io',
-                              'https://bsc-dataseed1.ninicoin.io',
-                              'https://bsc.mytokenpocket.vip'],
+httpNodeDictionary = {
+                      # 'Ethereum': ['https://eth-mainnet.public.blastapi.io',
+                      #              'https://rpc.ankr.com/eth',
+                      #              'https://eth-rpc.gateway.pokt.network',
+                      #              'https://eth-mainnet-public.unifra.io'],
+                      # 'BNB': ['https://bsc-dataseed3.defibit.io',
+                      #         'https://bsc-dataseed2.defibit.io',
+                      #         'https://bsc-dataseed1.defibit.io',
+                      #         'https://bsc-dataseed1.ninicoin.io',
+                      #         'https://bsc.mytokenpocket.vip'],
                       'Avalanche-C': ['https://rpc.ankr.com/avalanche',
                                       'https://1rpc.io/avax/c',
-                                      'https://api.avax.network/ext/bc/C/rpc',
-                                      'https://avaIancheapi.terminet.io/ext/bc/C/rpc'],
+                                      'https://api.avax.network/ext/bc/C/rpc'],
                       'Polygon': ['https://poly-rpc.gateway.pokt.network',
                                   'https://1rpc.io/matic',
                                   'https://polygonapi.terminet.io/rpc',
@@ -29,10 +28,12 @@ httpNodeDictionary = {'Ethereum': ['https://eth-mainnet.public.blastapi.io',
 
 
 def check(addr):
-    ans = False
     isConnected = False
     hasValue = False
+    w3 = object()
+    sigleHTTP = str()
     addr = str(hex(addr))
+    checksum_address = Web3.toChecksumAddress(addr)
     print(addr)
     while not hasValue:
         for key in httpNodeDictionary.keys():
@@ -40,11 +41,12 @@ def check(addr):
             for i in range(len(httpList)):
                 sigleHTTP = httpList[i]
                 w3 = Web3(Web3.HTTPProvider(sigleHTTP))
-                if w3.isConnected():
+                isConnected = w3.isConnected()
+                if isConnected:
                     break
-                hasValue = bool(w3.eth.get_balance(addr))
-                print(key,sigleHTTP,hasValue)
-            # if hasValue:
-            #     return True, key
-        return False
+            hasValue = bool(w3.eth.get_balance(checksum_address))
+            print(key,sigleHTTP,hasValue)
+            if hasValue:
+                return True, key
+        return False, None
 check(0x5568BC7EebC605A88e247769c4acA92d95BC9360)
