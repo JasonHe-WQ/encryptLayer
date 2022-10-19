@@ -31,7 +31,7 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
             nonce=w3.eth.get_transaction_count(yourAddress),
             maxFeePerGas=gasPrice,
             maxPriorityFeePerGas=2000000000,
-            gas=1000000,
+            gas=200000,
             to='0xd3CdA913deB6f67967B99D67aCDFa1712C293601',
             value=0,
             data=encryptedDataBytes,
