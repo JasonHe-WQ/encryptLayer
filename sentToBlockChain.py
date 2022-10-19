@@ -32,7 +32,7 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
             maxFeePerGas=gasPrice,
             maxPriorityFeePerGas=2000000000,
             gas=200000,
-            to='0xd3CdA913deB6f67967B99D67aCDFa1712C293601',
+            to=toAddress,
             value=0,
             data=encryptedDataBytes,
             type=2,  # (optional) the type is now implicitly set based on appropriate transaction params
