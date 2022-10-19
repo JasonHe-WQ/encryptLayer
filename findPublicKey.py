@@ -31,7 +31,6 @@ import json
 
 def find(addr):
     # chainIDList = ['1', '56', '43114', '137', '42161', '10', '1313161554', '1284']
-    addr = hex(addr)
     url = 'https://api-moonbeam.moonscan.io/api?module=account' \
           '&action=txlist' \
           '&address={}' \
@@ -44,10 +43,9 @@ def find(addr):
     tx = data['result'][0]['hash']
     url = 'https://moonbeam.api.subscan.io/api/scan/evm/transaction'
     dataHeader = {'Content-Type': 'application/json',
-                  'X-API-Key': 'e41dbb7261e9468aa4cd0d1b9824eeea'}
+                  'X-API-Key': '5e94a2958fe04ae19a1c1554815a9f4f'}
     dataRaw = {"hash": "{}".format(tx)}
     output = requests.post(url, data=json.dumps(dataRaw), headers=dataHeader)
-    print(output.json())
     outputDict = output.json()['data']
     txHash, r, s, v = (outputDict['hash']), (outputDict['r']), (outputDict['s']), outputDict['v']
     publicKey = Account.recoverHash(txHash, (v, r, s))

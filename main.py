@@ -75,7 +75,6 @@ class mailbox():
                 who revealed the public key.
                 Network support: Only Moonbeam!!!
                 """
-                print(type(senderAddr))
                 self.senderAddr = hex(senderAddr)
                 self.senderPublicKey = findPublicKey.find(self.senderAddr)
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
