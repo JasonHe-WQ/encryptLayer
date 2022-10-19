@@ -75,6 +75,8 @@ class mailbox():
                 who revealed the public key.
                 Network support: Only Moonbeam!!!
                 """
+                print(type(senderAddr))
+                self.senderAddr = hex(senderAddr)
                 self.senderPublicKey = findPublicKey.find(self.senderAddr)
             self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
 
@@ -84,16 +86,16 @@ class mailbox():
         else:
             raise 'Error, Not supported encrypt type'
 
-    def decrypt(self, fromAddr=None, password=None):
+    def decrypt(self, senderAddr=None, password=None):
         """
         This method will decrypt and print the data
-        :param fromAddr: When self.encryptType == 'RSA', please use this parameter
+        :param senderAddr: When self.encryptType == 'RSA', please use this parameter
         :param password: When self.encryptType == 'ESA', please use this parameter
         :return:
         """
-        if fromAddr is None:
-            fromAddr = self.address
-        self.senderAddr = fromAddr
+        if senderAddr is None:
+            senderAddr = self.address
+
         ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
         if ans:
             print('Address matched')
@@ -139,6 +141,6 @@ class mailbox():
 
 msg = mailbox(True)
 msg.encryptType = 'ESA'
-msg.encrypt()
+msg.encrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360)
 msg.sign()
 msg.decrypt()
