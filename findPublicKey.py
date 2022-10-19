@@ -3,6 +3,7 @@ from eth_account import Account
 import json
 
 
+
 #
 # explorer = {
 #     '1': 'https://api.etherscan.io',
@@ -31,19 +32,21 @@ import json
 
 def find(addr):
     # chainIDList = ['1', '56', '43114', '137', '42161', '10', '1313161554', '1284']
-    # tx = int()
-    # addr = hex(addr)
-    # url = 'https://api-moonbeam.moonscan.io/api?module=account' \
-    #       '&action=txlist' \
-    #       '&address={}' \
-    #       '&startblock=1&endblock=99999999' \
-    #       '&page=1&offset=1&sort=asc' \
-    #       '&apikey=BIV283PS7UZ87FHET11GH9N3PV13IVYBM5'.format(addr)
-
+    tx = str()
+    addr = hex(addr)
+    url = 'https://api-moonbeam.moonscan.io/api?module=account' \
+          '&action=txlist' \
+          '&address={}' \
+          '&startblock=1&endblock=99999999' \
+          '&page=1&offset=1&sort=asc' \
+          '&apikey=BIV283PS7UZ87FHET11GH9N3PV13IVYBM5'.format(addr)
+    print(requests.get(url))
+    print(url)
+    tx = hex(0x507d269ad2022ffdb0dff875a5a4c78aaf98c13a25b3cc6028033731e000ddd3)
     url = 'https://moonbeam.api.subscan.io/api/scan/evm/transaction'
     dataHeader = {'Content-Type': 'application/json',
                   'X-API-Key': 'e41dbb7261e9468aa4cd0d1b9824eeea'}
-    dataRaw = {"hash": "0x9490f7b32be859f93f688100f3cb58a9d7daabddd75f1a21b7591e124dd9b1df"}
+    dataRaw = {"hash": "{}".format(tx)}
     output = requests.post(url, data=json.dumps(dataRaw), headers=dataHeader)
     print(output.json())
     outputDict = output.json()['data']
