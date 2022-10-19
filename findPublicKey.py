@@ -46,7 +46,11 @@ def find(addr):
                   'X-API-Key': '5e94a2958fe04ae19a1c1554815a9f4f'}
     dataRaw = {"hash": "{}".format(tx)}
     output = requests.post(url, data=json.dumps(dataRaw), headers=dataHeader)
-    outputDict = output.json()['data']
+    try:
+        outputDict = output.json()['data']
+    except Exception:
+        print('No TX yet, please use another address')
+        return
     txHash, r, s, v = (outputDict['hash']), (outputDict['r']), (outputDict['s']), outputDict['v']
     publicKey = Account.recoverHash(txHash, (v, r, s))
     print(type(publicKey))
