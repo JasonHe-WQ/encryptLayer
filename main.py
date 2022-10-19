@@ -139,7 +139,7 @@ class mailbox():
         if permanent is True:
             chainID = input('Please choose the chain you would like to use')
             """
-            1: Ethereum, 137: Polygon, 56: BNB, 43114:AVAX-C, 10: Optimistic, 42161: Arbitrum, 1284: Moonbeam
+            1: Ethereum, 137: Polygon, 56: BNB
             """
             tx = sentToBlockChain.send(chainID, self.address, self.senderAddr, self.__privateKey)
         else:
