@@ -17,14 +17,14 @@ import json
 # }
 
 # myToken = {
-#     '1': 'VYDCJ3TMWJKTS1FRXVHEWQRSZE6D8HRWI9',
-#     '56': '5QXV3MKW67M4S53WHFDFQ9DUUSSN8RW1GI',
-#     '43114': 'H13WYPR9C7XV411NK9BGVP8C7KH7V4BPNZ',
-#     '137': '2KTHMFT4CIZ9WDIQWQIK9ESD7I9T1VCG5Q',
-#     '42161': '6XIWP1HZR51JEMWPW31CQTPMSVQRRPS26U',
-#     '10': '7G41Q95JB979VKNDE6B7Z5APEWKK11Y644',
-#     '1313161554': 'VK1X8E2VN3H7SBDFFZQV4WPSIMWAAF3J49',
-#     '1284': 'BIV283PS7UZ87FHET11GH9N3PV13IVYBM5'
+#     '1': '',
+#     '56': '',
+#     '43114': '',
+#     '137': '',
+#     '42161': '',
+#     '10': '',
+#     '1313161554': '',
+#     '1284': ''
 #
 # }
 
@@ -50,7 +50,7 @@ def find(addr):
         outputDict = output.json()['data']
     except Exception:
         print('No TX yet, please use another address')
-        return
+        return False
     txHash, r, s, v = (outputDict['hash']), (outputDict['r']), (outputDict['s']), outputDict['v']
     publicKey = Account.recoverHash(txHash, (v, r, s))
     print(type(publicKey))

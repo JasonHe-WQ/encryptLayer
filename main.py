@@ -77,7 +77,10 @@ class mailbox():
                 """
                 self.senderAddr = hex(senderAddr)
                 self.senderPublicKey = findPublicKey.find(self.senderAddr)
-            self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
+            if not self.senderPublicKey:
+                self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
+            else:
+                return
 
         elif self.encryptType == 'ESA':
             self.password, nonce, tag, self.encryptedBytes = ESAEncrypt.encryptWithPassword()
