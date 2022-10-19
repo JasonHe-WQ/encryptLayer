@@ -26,6 +26,7 @@ class mailbox():
         self.password = bytes()
         self.acct = object()
         self.senderPublicKey = 0x0
+        self.ifGenerate = bool()
         """
         Initialize and Generate a EVM account.The Private Key Will Be stored As A Parameter and A str in file.
         When using again, please import your private key in HEX to continue your conversation.
@@ -33,6 +34,7 @@ class mailbox():
         """
         if ifHadAccount is False:
             self.__privateKey, self.__privateKeyInHex, self.address, self.acct = generatePrivateKey.generate()
+            self.ifGenerate = False
 
         else:
             privateKeyInHex = input('Please Import Your Private Key In Hex')
@@ -40,6 +42,7 @@ class mailbox():
             self.__privateKey = acct.key
             self.address = acct.address
             self.__privateKeyInHex = privateKeyInHex
+            self.ifGenerate = True
         Keys = keys.PrivateKey(self.__privateKey)
         self.publicKey = Keys.public_key
         print(self.publicKey)
@@ -130,6 +133,7 @@ class mailbox():
                         flag = False
 
     def sendOnline(self, permanent):
+        if
         if permanent is True:
             pass
         else:
