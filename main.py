@@ -138,7 +138,10 @@ class mailbox():
             raise "No token to spend gas fee"
         if permanent is True:
             chainID = input('Please choose the chain you would like to use')
-            tx = sentToBlockChain.send(chainID)
+            """
+            1: Ethereum, 137: Polygon, 56: BNB, 43114:AVAX-C, 10: Optimistic, 42161: Arbitrum, 1284: Moonbeam
+            """
+            tx = sentToBlockChain.send(chainID, self.address, self.senderAddr, self.__privateKey)
         else:
             print("This message will be stored on a centralize server for 7 days.")
             pass
