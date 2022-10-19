@@ -2,12 +2,10 @@ from web3 import Web3
 
 explorer = {
     '1': 'https://api.etherscan.io',
-    '56': 'https://api.bscscan.com/',
     '137': 'https://api.polygonscan.com',
 }
 myToken = {
     '1': 'VYDCJ3TMWJKTS1FRXVHEWQRSZE6D8HRWI9',
-    '56': '5QXV3MKW67M4S53WHFDFQ9DUUSSN8RW1GI',
     '137': '2KTHMFT4CIZ9WDIQWQIK9ESD7I9T1VCG5Q',
 
 }
@@ -21,7 +19,6 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
         APIList = {
             '1': 'https://rpc.ankr.com/eth',
             '137': 'https://polygon-rpc.com',
-            '56': 'https://polygon-rpc.com',
         }
         with open('encryptedData.bin', 'rb') as f:
             encryptedDataBytes = f.read()
