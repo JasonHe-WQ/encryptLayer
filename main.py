@@ -9,6 +9,7 @@ import ESAEncrypt
 import ESADecrypt
 from eth_keys import keys
 from eth_keys import KeyAPI
+import sentToBlockChain
 
 
 class mailbox():
@@ -136,7 +137,8 @@ class mailbox():
         if self.ifGenerate is False:
             raise "No token to spend gas fee"
         if permanent is True:
-            pass
+            chainID = input('Please choose the chain you would like to use')
+            tx = sentToBlockChain.send(chainID)
         else:
             print("This message will be stored on a centralize server for 7 days.")
             pass
