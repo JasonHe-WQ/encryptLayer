@@ -1,6 +1,7 @@
 import requests
 from eth_account import Account
 import json
+from eth_keys import KeyAPI
 
 
 #
@@ -40,6 +41,7 @@ def find(addr):
     dataHeader = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'}
     data = requests.get(url, headers=dataHeader).json()
+    print(data)
     tx = data['result'][0]['hash']
     url = 'https://moonbeam.api.subscan.io/api/scan/evm/transaction'
     dataHeader = {'Content-Type': 'application/json',
@@ -53,7 +55,10 @@ def find(addr):
         return False
     txHash, r, s, v = (outputDict['hash']), (outputDict['r']), (outputDict['s']), outputDict['v']
     publicKey = Account.recoverHash(txHash, (v, r, s))
-    print(type(publicKey))
+    # publicKey = bin(eval(publicKey))
+    print(publicKey)
+    publicKey = bytes(publicKey, 'utf-8')
+    print(len(publicKey))
     return publicKey
 
     # for chainID in chainIDList:
@@ -85,4 +90,4 @@ def find(addr):
     #         return publicKey
 
 
-# print(find(0x5568BC7EebC605A88e247769c4acA92d95BC9360))
+print(find('0x5568BC7EebC605A88e247769c4acA92d95BC9360'))
