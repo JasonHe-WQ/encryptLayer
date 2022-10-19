@@ -26,7 +26,7 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
         with open('encryptedData.bin', 'rb') as f:
             encryptedDataBytes = f.read()
         w3 = Web3(Web3.HTTPProvider(APIList[i]))
-        gasUrl = 'https://{}/api?module=gastracker&action=gasoracle&apikey={}'.format(explorer[chainID],
+        gasOracleUrl = 'https://{}/api?module=gastracker&action=gasoracle&apikey={}'.format(explorer[chainID],
                                                                                       myToken[chainID])
         rawHex = w3.eth.account.sign_transaction(dict(
             nonce=w3.eth.get_transaction_count(yourAddress),
