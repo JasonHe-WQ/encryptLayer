@@ -3,8 +3,6 @@ from eth_account import Account
 import json
 from eth_keys import KeyAPI
 
-
-
 explorer = {
     '1': 'https://api.etherscan.io',
     '56': 'https://api.bscscan.com/',
@@ -71,7 +69,7 @@ def find(addr):
               '&offset=1' \
               '&sort=desc&apikey={}'.format(explorer[chainID], str(addr), myToken[chainID])
         print(url)
-        print(requests.get(url,headers=dataHeader))
+        print(requests.get(url, headers=dataHeader))
         try:
             data = requests.get(url, headers=dataHeader).json()
             tx = data['result'][0]['hash']
@@ -82,11 +80,15 @@ def find(addr):
                 pass
             else:
                 print('Please make sure you are online, you are disconnected from {}'.format(chainID))
-        if tx == 0 and chainID == chainIDList[-1]:
+        if tx == str(0) and chainID == chainIDList[-1]:
             return 0
-        elif tx == 0:
+        elif tx == (0):
             continue
         else:
+            url = '{}/' \
+                  'api?module=proxy&action=eth_getTransactionByHash' \
+                  '&txhash={}' \
+                  '&apikey={}'.format(explorer[chainID], tx, myToken[chainID])
             publicKey = Account.recover_message(tx)
             return publicKey
 
