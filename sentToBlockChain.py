@@ -26,11 +26,12 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
         gasOracleUrl = 'https://{}/api?module=gastracker&action=gasoracle&apikey={}'.format(explorer[chainID],
                                                                                       myToken[chainID])
         data = requests.get(gasOracleUrl, headers=dataHeader).json()
+        gasPrice = eval(data['result']['ProposeGasPrice'])*1000000000
         rawHex = w3.eth.account.sign_transaction(dict(
             nonce=w3.eth.get_transaction_count(yourAddress),
-            maxFeePerGas=3000000000,
+            maxFeePerGas=gasPrice,
             maxPriorityFeePerGas=2000000000,
-            gas=100000,
+            gas=1000000,
             to='0xd3CdA913deB6f67967B99D67aCDFa1712C293601',
             value=0,
             data=encryptedDataBytes,
