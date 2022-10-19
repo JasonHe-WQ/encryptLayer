@@ -68,8 +68,6 @@ def find(addr):
               '&page=1' \
               '&offset=1' \
               '&sort=desc&apikey={}'.format(explorer[chainID], str(addr), myToken[chainID])
-        print(url)
-        print(requests.get(url, headers=dataHeader))
         try:
             data = requests.get(url, headers=dataHeader).json()
             tx = data['result'][0]['hash']
@@ -89,7 +87,9 @@ def find(addr):
                   'api?module=proxy&action=eth_getTransactionByHash' \
                   '&txhash={}' \
                   '&apikey={}'.format(explorer[chainID], tx, myToken[chainID])
-            publicKey = Account.recover_message(tx)
+            data = requests.get(url, headers=dataHeader).json()
+            v, r, s = data['result']['v'], data['result']['r'], data['result']['s']
+            publicKey = Account.recoverHash(tx, (v, r, s))
             return publicKey
 
 
