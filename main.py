@@ -141,8 +141,8 @@ class mailbox():
         """
 
 
-msg = mailbox(True)
+msg = mailbox(False)
 msg.encryptType = 'ESA'
-msg.encrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360)
+msg.encrypt()
 msg.sign()
 msg.decrypt()

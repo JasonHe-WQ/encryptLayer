@@ -96,4 +96,3 @@ def find(addr):
             return publicKey
 
 
-# print(find('0x5568BC7EebC605A88e247769c4acA92d95BC9360'))
