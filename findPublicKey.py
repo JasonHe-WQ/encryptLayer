@@ -90,8 +90,7 @@ def find(addr):
             data = requests.get(url, headers=dataHeader).json()
             v, r, s = data['result']['v'], data['result']['r'], data['result']['s']
             publicKey = Account.recoverHash(tx, (v, r, s))
-            print(publicKey)
-            print(publicKey[2:])
+            publicKey.lower()
             publicKey = bytes.fromhex(publicKey[2:])
             return publicKey
 
