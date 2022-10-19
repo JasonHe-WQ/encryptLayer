@@ -73,7 +73,7 @@ class mailbox():
                 """
                 If the sender has made any tx, you can get the public key. Else, you can only send message to
                 who revealed the public key.
-                Network support: Only Moonbeam!!!
+                Network support: ETH,BNB,Polygon
                 """
                 self.senderAddr = hex(senderAddr)
                 self.senderPublicKey = findPublicKey.find(self.senderAddr)
