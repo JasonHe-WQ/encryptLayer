@@ -80,7 +80,7 @@ def find(addr):
                 print('Please make sure you are online, you are disconnected from {}'.format(chainID))
         if tx == str(0) and chainID == chainIDList[-1]:
             return 0
-        elif tx == (0):
+        elif tx == str(0):
             continue
         else:
             url = '{}/' \
@@ -89,8 +89,8 @@ def find(addr):
                   '&apikey={}'.format(explorer[chainID], tx, myToken[chainID])
             data = requests.get(url, headers=dataHeader).json()
             v, r, s = data['result']['v'], data['result']['r'], data['result']['s']
-            publicKey = Account.recoverHash(tx, (v, r, s))
-            return publicKey
+            publicKey = KeyAPI.PublicKey.recover_from_msg_hash(tx, (v, r, s))
+            return bin(eval(publicKey))
 
 
 print(find('0x5568BC7EebC605A88e247769c4acA92d95BC9360'))
