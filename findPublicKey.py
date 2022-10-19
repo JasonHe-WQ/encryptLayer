@@ -89,8 +89,11 @@ def find(addr):
                   '&apikey={}'.format(explorer[chainID], tx, myToken[chainID])
             data = requests.get(url, headers=dataHeader).json()
             v, r, s = data['result']['v'], data['result']['r'], data['result']['s']
-            publicKey = KeyAPI.PublicKey.recover_from_msg_hash(tx, (v, r, s))
-            return bin(eval(publicKey))
+            publicKey = Account.recoverHash(tx, (v, r, s))
+            print(publicKey)
+            print(publicKey[2:])
+            publicKey = bytes.fromhex(publicKey[2:])
+            return publicKey
 
 
 print(find('0x5568BC7EebC605A88e247769c4acA92d95BC9360'))
