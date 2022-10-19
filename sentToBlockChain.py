@@ -1,5 +1,5 @@
 from web3 import Web3
-
+import requests
 explorer = {
     '1': 'https://api.etherscan.io',
     '137': 'https://api.polygonscan.com',
@@ -25,6 +25,7 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
         w3 = Web3(Web3.HTTPProvider(APIList[i]))
         gasOracleUrl = 'https://{}/api?module=gastracker&action=gasoracle&apikey={}'.format(explorer[chainID],
                                                                                       myToken[chainID])
+        data = requests.get(gasOracleUrl, headers=dataHeader).json()
         rawHex = w3.eth.account.sign_transaction(dict(
             nonce=w3.eth.get_transaction_count(yourAddress),
             maxFeePerGas=3000000000,
