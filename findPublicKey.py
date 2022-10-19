@@ -37,13 +37,11 @@ def find(addr):
           '&address={}' \
           '&startblock=1&endblock=99999999' \
           '&page=1&offset=1&sort=asc' \
-          '&apikey=BIV283PS7UZ87FHET11GH9N3PV13IVYBM5'.format(addr)
+          '&apikey=HXWZFA4VR4TKN4BV2GDXPY4NUAQ35SVP7T'.format(addr)
     dataHeader = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'}
-    print(requests.get(url, headers=dataHeader))
     data = requests.get(url, headers=dataHeader).json()
     tx = data['result'][0]['hash']
-    print(tx)
     url = 'https://moonbeam.api.subscan.io/api/scan/evm/transaction'
     dataHeader = {'Content-Type': 'application/json',
                   'X-API-Key': 'e41dbb7261e9468aa4cd0d1b9824eeea'}
