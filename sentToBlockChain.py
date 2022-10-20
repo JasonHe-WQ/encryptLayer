@@ -45,4 +45,3 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
         .format(explorer[chainID], rawHex['rawTransaction'].hex(), myToken[chainID])
     tx = requests.get(url).json()['result']
     return tx
-send('137','0x5568BC7EebC605A88e247769c4acA92d95BC9360','0x5568BC7EebC605A88e247769c4acA92d95BC9360','0xf246f79dfc201c11889f4d0ba7fa44e210f80cf8d35ca38d7dc2663fa9900a79')
