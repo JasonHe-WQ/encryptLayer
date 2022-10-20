@@ -158,10 +158,11 @@ class mailbox():
         """
 
 
-msg = mailbox(False)
+msg = mailbox(ifHadAccount=False)
 msg.encryptType = 'ESA'
-msg.encrypt(senderPublicKey=0x017547c5eaae082fba7276c537a073d010d4000b7fa46e897f7b6849f3083f0a2456034a03631cc34392ef8d4c38f62aebcca32b08dc6202b47ead07b0a25b6b
-,senderAddr=None)
+msg.encrypt(
+    senderPublicKey=0x017547c5eaae082fba7276c537a073d010d4000b7fa46e897f7b6849f3083f0a2456034a03631cc34392ef8d4c38f62aebcca32b08dc6202b47ead07b0a25b6b,
+    senderAddr=None)
 msg.sign()
-msg.decrypt()
+msg.decrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360,password=None)
 msg.sendOnline(True)
