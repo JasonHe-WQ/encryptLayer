@@ -46,7 +46,8 @@ class mailbox():
             self.ifGenerate = True
         Keys = keys.PrivateKey(self.__privateKey)
         self.publicKey = Keys.public_key
-        print(self.publicKey)
+        print('Your public key is {}:', self.publicKey)
+        print('Your address is   {}'.format(self.address))
         # publicKey and privateKey are stored as '0x' and will be use as str hex and stored in 'privateKeyInHex.txt'.
         self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
 
@@ -55,8 +56,8 @@ class mailbox():
         This method will read the encrypted file and generate a signed file name 'signedMessage.bin'
         :return:None
         """
-        self.signature = encrypt1.signWithPrivateKey(self.__privateKey)
-        print('The Signature has been saved as "signedMessage.bin"')
+        self.signature = encrypt1.signWithPrivateKey(self.__privateKeyInHex)
+        print('The Signature by address:  {} has been saved as "signedMessage.bin"'.format(self.address))
 
     def encrypt(self, senderPublicKey=None, senderAddr=None, Type='RSA'):
         """
@@ -107,14 +108,16 @@ class mailbox():
         """
         if senderAddr is None:
             senderAddr = self.address
-
-        ans, addr = decrypt2.verify(senderAddr=senderAddr)
+        else:
+            self.senderAddr = senderAddr
+        ans, addr = decrypt2.verify(senderAddr=self.address)
         if ans:
             print('Address matched')
             flag = True
         else:
-            print(addr)
-            print("Addresses don't match")
+            print('Decrypted Address is {}'.format(addr))
+            print('Sender Address is  {}'.format(hex(self.senderAddr)))
+            print("Addresses don't match, it should be your address")
             return
         if self.encryptType == 'RSA':
             decrypt1.decryptWithPrivateKey(self.__privateKeyInHex)
