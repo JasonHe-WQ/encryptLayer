@@ -13,6 +13,6 @@ def verify(senderAddr):
     decryptedAddr = w3.eth.account.recover_message(Msg, signature=signedMessage.signature)
     if type(senderAddr) == str():
         senderAddr = eval(senderAddr)
-    print(senderAddr)
-    print(eval(decryptedAddr))
+    print('The assumed sender is {}'.format(hex(senderAddr)))
+    print('The actual sender is {}'.format(eval(decryptedAddr)))
     return senderAddr == eval(decryptedAddr), decryptedAddr

@@ -103,13 +103,15 @@ class mailbox():
         else:
             raise 'Error, Not supported encrypt type'
 
-    def decrypt(self,  password=None):
+    def decrypt(self, senderAddr=None,  password=None):
         """
         This method will decrypt and print the data
         :param senderAddr: When self.encryptType == 'RSA', please use this parameter with Hex
         :param password: When self.encryptType == 'ESA', please use this parameter with BytesSrting
         :return:
         """
+        if senderAddr is not None:
+            self.senderAddr = senderAddr
         ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
         if ans:
             print('Address matched')
