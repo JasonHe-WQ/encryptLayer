@@ -14,5 +14,5 @@ def verify(senderAddr):
     if type(senderAddr) == str():
         senderAddr = eval(senderAddr)
     print('The assumed sender is {}'.format(hex(senderAddr)))
-    print('The actual sender is {}'.format(eval(decryptedAddr)))
-    return senderAddr == eval(decryptedAddr), decryptedAddr
+    print('The actual sender is {}'.format(decryptedAddr))
+    return senderAddr == eval(decryptedAddr)

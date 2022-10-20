@@ -9,6 +9,6 @@ def encryptWithPublicKey(publicKey):
     encryptedData = ecies.encrypt(publicKey, bytes(msg))
     with open('encryptedData.bin', 'wb') as f:
         f.write(encryptedData)
-    print('The encrypted data has been saved as "encryptedData.bin" encrypted by {}'.format(publicKey))
+    print('The encrypted data has been saved as "encryptedData.bin" encrypted by {}\n'.format(publicKey))
     return encryptedData
 

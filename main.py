@@ -112,13 +112,11 @@ class mailbox():
         """
         if senderAddr is not None:
             self.senderAddr = senderAddr
-        ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
+        ans = decrypt2.verify(senderAddr=self.senderAddr)
         if ans:
             print('Address matched')
             flag = True
         else:
-            print('Decrypted Address is {}'.format(addr))
-            print('Sender Address is  {}'.format(hex(self.senderAddr)))
             print("Addresses don't match, it should be the message sender's address")
             return
         if self.encryptType == 'RSA':
