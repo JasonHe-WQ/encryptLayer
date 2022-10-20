@@ -63,7 +63,7 @@ class mailbox():
         This method will read the text file named 'data.txt' and generate an encrypted text file named
         'encryptedData.txt' with the receiver's address
         :param senderPublicKey:When the parameter 'Type' is set as RSA and transactions hash can't be found on chain,
-         please provide the senderPublicKey of receiver
+         please provide the senderPublicKey of receiver inHex
         :param senderAddr:When the parameter 'Type' is set as RSA, please provide the address of receiver in Hex
         :param Type:'RSA' for default Ethereum encrypt function, 'ESA' for using same password both sides knew
         :return:
@@ -73,6 +73,8 @@ class mailbox():
             if senderAddr is None:
                 if senderPublicKey is None:
                     self.senderPublicKey = self.publicKey
+                else:
+                    self.senderPublicKey = senderPublicKey
             else:
                 """
                 If the sender has made any tx, you can get the public key. Else, you can only send message to
@@ -80,8 +82,12 @@ class mailbox():
                 Network support: ETH,BNB,Polygon
                 """
                 self.senderAddr = hex(senderAddr)
-                self.senderPublicKey = findPublicKey.find(self.senderAddr)
-            if self.senderPublicKey:
+                # self.senderPublicKey = findPublicKey.find(self.senderAddr)
+                """
+                IT DOES NOT WORK RIGHT NOW
+                """
+                self.senderPublicKey = self.publicKey
+            if self.senderPublicKey is not None:
                 self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
             else:
                 return
@@ -95,8 +101,8 @@ class mailbox():
     def decrypt(self, senderAddr=None, password=None):
         """
         This method will decrypt and print the data
-        :param senderAddr: When self.encryptType == 'RSA', please use this parameter
-        :param password: When self.encryptType == 'ESA', please use this parameter
+        :param senderAddr: When self.encryptType == 'RSA', please use this parameter with Hex
+        :param password: When self.encryptType == 'ESA', please use this parameter with BytesSrting
         :return:
         """
         if senderAddr is None:
@@ -154,7 +160,8 @@ class mailbox():
 
 msg = mailbox(False)
 msg.encryptType = 'ESA'
-msg.encrypt()
+msg.encrypt(senderPublicKey=0x017547c5eaae082fba7276c537a073d010d4000b7fa46e897f7b6849f3083f0a2456034a03631cc34392ef8d4c38f62aebcca32b08dc6202b47ead07b0a25b6b
+,senderAddr=None)
 msg.sign()
 msg.decrypt()
 msg.sendOnline(True)

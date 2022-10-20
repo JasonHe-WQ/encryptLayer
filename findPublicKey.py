@@ -79,7 +79,7 @@ def find(addr):
             else:
                 print('Please make sure you are online, you are disconnected from {}'.format(chainID))
         if tx == str(0) and chainID == chainIDList[-1]:
-            return 0
+            return None
         elif tx == str(0):
             continue
         else:
