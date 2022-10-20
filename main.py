@@ -115,7 +115,7 @@ class mailbox():
         ans = decrypt2.verify(senderAddr=self.senderAddr)
         if ans:
             print('Address matched')
-            flag = True
+            ifMatch = True
         else:
             print("Addresses don't match, it should be the message sender's address")
             return
@@ -126,7 +126,7 @@ class mailbox():
             if password is None:
                 with open('ESAPassword.bin', 'rb') as f:
                     password = f.read()
-            while flag:
+            while ifMatch:
                 """
                 Note that the code generates a ValueError exception when tampering is detected 
                 or the password doesn't match.
@@ -140,7 +140,7 @@ class mailbox():
                     print('Please Check Again')
                     ifAgain = input('Another Try?')
                     if ifAgain is None or False:
-                        flag = False
+                        ifMatch = False
 
     def sendOnline(self, permanent=False):
         if permanent is True:
@@ -162,10 +162,9 @@ class mailbox():
 
 
 msg = mailbox(ifHadAccount=False)
-msg.encryptType = 'ESA'
 msg.encrypt(
     senderPublicKey=0x017547c5eaae082fba7276c537a073d010d4000b7fa46e897f7b6849f3083f0a2456034a03631cc34392ef8d4c38f62aebcca32b08dc6202b47ead07b0a25b6b,
-    senderAddr=None)
+    senderAddr=None,Type='ESA')
 msg.sign()
 msg.decrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360,password=None)
-msg.sendOnline(True)
+msg.sendOnline(False)
