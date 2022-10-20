@@ -117,7 +117,7 @@ class mailbox():
         else:
             print('Decrypted Address is {}'.format(addr))
             print('Sender Address is  {}'.format(hex(self.senderAddr)))
-            print("Addresses don't match, it should be your address")
+            print("Addresses don't match, it should be the message sender's address")
             return
         if self.encryptType == 'RSA':
             decrypt1.decryptWithPrivateKey(self.__privateKey)
