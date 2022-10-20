@@ -133,7 +133,7 @@ class mailbox():
                     if ifAgain is None or False:
                         flag = False
 
-    def sendOnline(self, permanent):
+    def sendOnline(self, permanent=False):
         if permanent is True:
             if self.ifGenerate is False:
                 raise "No token to spend gas fee"
@@ -157,3 +157,4 @@ msg.encryptType = 'ESA'
 msg.encrypt()
 msg.sign()
 msg.decrypt()
+msg.sendOnline(True)

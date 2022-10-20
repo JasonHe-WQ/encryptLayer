@@ -21,7 +21,7 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
         '137': 'https://polygon-rpc.com',
         # '80001': 'https://rpc-mumbai.maticvigil.com'
     }
-    with open('encryptedData.bin', 'rb') as f:
+    with open('signedMessage.bin', 'rb') as f:
         encryptedDataBytes = f.read()
     w3 = Web3(Web3.HTTPProvider(APIList[chainID]))
     gasOracleUrl = '{}/api?module=gastracker&action=gasoracle&apikey={}'.format(explorer[chainID],
