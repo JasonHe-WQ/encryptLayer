@@ -8,4 +8,4 @@ def generate():
     print(privateKeyInHex + '     This is your private key. Save It And Not Share It')
     with open('privateKeyInHex.txt','w') as f:
         f.write(privateKeyInHex)
-    return privateKey, privateKeyInHex, acct.address, acct
+    return privateKey, privateKeyInHex.zfill(64), acct.address, acct

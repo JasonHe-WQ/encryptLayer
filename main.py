@@ -72,9 +72,7 @@ class mailbox():
         :param Type:'RSA' for default Ethereum encrypt function, 'ESA' for using same password both sides knew
         :return:
         """
-        print(len(hex(senderPublicKey)))
         senderPublicKey = '0x' + hex(senderPublicKey)[2:].zfill(128)
-        print(len(senderPublicKey))
         self.encryptType = Type
         if self.encryptType == 'RSA':
             if senderAddr is None:
@@ -126,7 +124,7 @@ class mailbox():
             print("Addresses don't match, it should be your address")
             return
         if self.encryptType == 'RSA':
-            decrypt1.decryptWithPrivateKey(self.__privateKeyInHex)
+            decrypt1.decryptWithPrivateKey(self.__privateKey)
         else:
             print("Please make sure your password is encoded as bytes and saved in 'ESAPassword.bin'")
             if password is None:
