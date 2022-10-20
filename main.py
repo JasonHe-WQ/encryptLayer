@@ -134,14 +134,15 @@ class mailbox():
                         flag = False
 
     def sendOnline(self, permanent):
-        if self.ifGenerate is False:
-            raise "No token to spend gas fee"
         if permanent is True:
-            chainID = input('Please choose the chain you would like to use')
+            if self.ifGenerate is False:
+                raise "No token to spend gas fee"
+            chainID = input('Please choose the chain you would like to use\n1: Ethereum, 137: Polygon')
             """
             1: Ethereum, 137: Polygon
             """
             tx = sentToBlockChain.send(chainID, self.address, self.senderAddr, self.__privateKey)
+            print('Your encrypted data has been sent with tx=\n{}'.format(tx))
         else:
             print("This message will be stored on a centralize server for 7 days.")
             pass
