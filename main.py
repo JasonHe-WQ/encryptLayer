@@ -81,7 +81,7 @@ class mailbox():
                 """
                 self.senderAddr = hex(senderAddr)
                 self.senderPublicKey = findPublicKey.find(self.senderAddr)
-            if not self.senderPublicKey:
+            if self.senderPublicKey:
                 self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
             else:
                 return
@@ -102,14 +102,14 @@ class mailbox():
         if senderAddr is None:
             senderAddr = self.address
 
-        ans, addr = decrypt2.verify(senderAddr=self.senderAddr)
+        ans, addr = decrypt2.verify(senderAddr=senderAddr)
         if ans:
             print('Address matched')
             flag = True
         else:
             print(addr)
             print("Addresses don't match")
-            raise ValueError
+            return
         if self.encryptType == 'RSA':
             decrypt1.decryptWithPrivateKey(self.__privateKeyInHex)
         else:

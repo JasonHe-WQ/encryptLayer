@@ -11,3 +11,4 @@ def decryptWithPrivateKey(privateKey):
     with open('text.bin', 'wb') as f:
         f.write(data)
     print(data)
+
