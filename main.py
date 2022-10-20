@@ -46,10 +46,13 @@ class mailbox():
             self.ifGenerate = True
         Keys = keys.PrivateKey(self.__privateKey)
         self.publicKey = Keys.public_key
-        print('Your public key is {}:', self.publicKey)
-        print('Your address is   {}'.format(self.address))
-        # publicKey and privateKey are stored as '0x' and will be use as str hex and stored in 'privateKeyInHex.txt'.
         self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
+        self.publicKey = hex(self.publicKey).zfill(130)
+        print('Your public key is {}:', self.publicKey)
+        print(len(self.publicKey))
+        print('Your address is   {}'.format(hex(self.address)))
+        # publicKey and privateKey are stored as '0x' and will be use as str hex and stored in 'privateKeyInHex.txt'.
+
 
     def sign(self):
         """
@@ -57,22 +60,25 @@ class mailbox():
         :return:None
         """
         self.signature = encrypt1.signWithPrivateKey(self.__privateKeyInHex)
-        print('The Signature by address:  {} has been saved as "signedMessage.bin"'.format(self.address))
+        print('The Signature by address:  {} has been saved as "signedMessage.bin"'.format(hex(self.address)))
 
     def encrypt(self, senderPublicKey=None, senderAddr=None, Type='RSA'):
         """
         This method will read the text file named 'data.txt' and generate an encrypted text file named
         'encryptedData.txt' with the receiver's address
         :param senderPublicKey:When the parameter 'Type' is set as RSA and transactions hash can't be found on chain,
-         please provide the senderPublicKey of receiver inHex
+         please provide the senderPublicKey of receiver in Hex
         :param senderAddr:When the parameter 'Type' is set as RSA, please provide the address of receiver in Hex
         :param Type:'RSA' for default Ethereum encrypt function, 'ESA' for using same password both sides knew
         :return:
         """
+        print(len(hex(senderPublicKey)))
+        senderPublicKey = '0x' + hex(senderPublicKey)[2:].zfill(128)
+        print(len(senderPublicKey))
         self.encryptType = Type
         if self.encryptType == 'RSA':
             if senderAddr is None:
-                if senderPublicKey is None:
+                if eval(senderPublicKey) == 0:
                     self.senderPublicKey = self.publicKey
                 else:
                     self.senderPublicKey = senderPublicKey

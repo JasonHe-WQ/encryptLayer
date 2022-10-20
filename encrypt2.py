@@ -5,10 +5,7 @@ import ecies
 def encryptWithPublicKey(publicKey):
     with open('data.txt', 'r') as f:
         msg = f.read().encode('utf-8')
-    if type(publicKey) == int:
-        publicKey = '0x'+hex(publicKey)[2:].zfill(128)
-    else:
-        pass
+    assert len(publicKey) == 130
     encryptedData = ecies.encrypt(publicKey, bytes(msg))
     with open('encryptedData.bin', 'wb') as f:
         f.write(encryptedData)
