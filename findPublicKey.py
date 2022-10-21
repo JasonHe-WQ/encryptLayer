@@ -55,7 +55,6 @@ def find(addr):
             unsigned_transaction = serializable_unsigned_transaction_from_dict(legacy_transaction)
             transaction_hash = unsigned_transaction.hash()
             tx = transaction_hash.hex()
-            # print("transaction_hash", tx)
         except Exception as e:
             print(e)
             del legacy_transaction['type']
@@ -82,5 +81,5 @@ def find(addr):
         publicKey = str(pubkey).replace("0x", '04')
         return publicKey
 
-publicKey=find("0x5568BC7EebC605A88e247769c4acA92d95BC9360")
-print(publicKey)
+# publicKey=find("0x5568BC7EebC605A88e247769c4acA92d95BC9360")
+# print(publicKey)
