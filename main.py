@@ -163,4 +163,4 @@ msg.encrypt(
     senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360, Type='RSA')
 msg.sign()
 msg.decrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360, password=None)
-msg.sendOnline('80001', False)
+msg.sendOnline(chainID='80001', permanent=False)
