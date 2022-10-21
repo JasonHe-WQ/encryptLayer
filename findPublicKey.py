@@ -2,9 +2,21 @@ import requests
 from eth_account import Account
 import json
 from eth_keys import KeyAPI
+from eth_utils import to_checksum_address
+from eth_account._utils.legacy_transactions import serializable_unsigned_transaction_from_dict
+from hexbytes import HexBytes
+from eth_utils.curried import (
+    combomethod,
+    hexstr_if_str,
+    is_dict,
+    keccak,
+    text_if_str,
+    to_bytes,
+    to_int,
+)
 
 explorer = {
-    '1': 'https://api.etherscan.io',
+    '1': 'https://api.etherscan.com',
     '56': 'https://api.bscscan.com/',
     '43114': 'https://api.snowtrace.io',
     '137': 'https://api.polygonscan.com',
@@ -29,7 +41,7 @@ myToken = {
 
 
 def find(addr):
-    chainIDList = ['1', '56', '43114', '137', '42161', '10', '1313161554', '1284']
+    chainIDList = ['137','1', '56', '43114', '137', '42161', '10', '1313161554', '1284']
     tx = int()
     # url = 'https://api-moonbeam.moonscan.io/api?module=account' \
     #       '&action=txlist' \
@@ -88,11 +100,47 @@ def find(addr):
                   '&txhash={}' \
                   '&apikey={}'.format(explorer[chainID], tx, myToken[chainID])
             data = requests.get(url, headers=dataHeader).json()
+            #print(data)
             v, r, s = data['result']['v'], data['result']['r'], data['result']['s']
-            publicKey = Account.recoverHash(tx, (v, r, s))
-            print(publicKey)
-            publicKey.lower()
-            publicKey = bytes.fromhex(publicKey[2:])
-            print(KeyAPI.PublicKey.from_compressed_bytes(publicKey))
-            return publicKey
 
+
+            legacy_transaction = data['result']
+            gasPrice=data['result']['gasPrice']
+            legacy_transaction.update({'data': data['result']['input'], 'to': to_checksum_address(data['result']['to'])})
+            keys=['from','blockHash','blockNumber','hash','input','transactionIndex','gasPrice','v','r','s']
+            for key in keys:
+                del legacy_transaction[key]
+            try:
+                unsigned_transaction = serializable_unsigned_transaction_from_dict(legacy_transaction)
+                transaction_hash = unsigned_transaction.hash()
+                tx = transaction_hash.hex()
+                #print("transaction_hash", tx)
+            except Exception as e:
+                print(e)
+                del legacy_transaction['type']
+                legacy_transaction.update({"gasPrice": gasPrice, 'chainId': int(chainID)})
+                unsigned_transaction = serializable_unsigned_transaction_from_dict(legacy_transaction)
+                transaction_hash = unsigned_transaction.hash()
+                tx = transaction_hash.hex()
+
+            hash_bytes = HexBytes(tx)
+            v, r, s = map(hexstr_if_str(to_int), (v, r, s))
+
+            v=0
+            vaddr = Account.recoverHash(tx, (v, r, s))
+            print(vaddr)
+            if vaddr == addr:
+                signature_obj = KeyAPI.Signature(vrs=(v, r, s))
+                pubkey = signature_obj.recover_public_key_from_msg_hash(hash_bytes)
+            else:
+                v = 1
+                vaddr = Account.recoverHash(tx, (v, r, s))
+                signature_obj = KeyAPI.Signature(vrs=(v, r, s))
+                pubkey = signature_obj.recover_public_key_from_msg_hash(hash_bytes)
+
+            publicKey = str(pubkey).replace("0x", '04')
+            print(publicKey)
+
+
+#publicKey=find("0x5568BC7EebC605A88e247769c4acA92d95BC9360")
+#print(publicKey)
