@@ -48,8 +48,8 @@ class mailbox():
         self.publicKey = Keys.public_key
         self.address = eval(KeyAPI.PublicKey.to_address(self.publicKey))
         self.publicKey = hex(self.publicKey).zfill(130)
-        print('Your public key is {}:', self.publicKey)
-        print(len(self.publicKey))
+        print('Your public key is {}:'.format(self.publicKey))
+        print(self.__privateKey)
         print('Your address is   {}'.format(hex(self.address)))
         # publicKey and privateKey are stored as '0x' and will be use as str hex and stored in 'privateKeyInHex.txt'.
 
@@ -84,9 +84,9 @@ class mailbox():
                 """
                 If the sender has made any tx, you can get the public key. Else, you can only send message to
                 who revealed the public key.
-                Network support: ETH,BNB,Polygon
+                Network supported: ETH
                 """
-                self.senderAddr = hex(senderAddr)
+                self.senderAddr = '0x' + hex(senderAddr)[2:].zfill(38)
                 # self.senderPublicKey = findPublicKey.find(self.senderAddr)
                 """
                 IT DOES NOT WORK RIGHT NOW
@@ -142,11 +142,10 @@ class mailbox():
                     if ifAgain is None or False:
                         ifMatch = False
 
-    def sendOnline(self, permanent=False):
+    def sendOnline(self, chainID='137', permanent=False ):
         if permanent is True:
             if self.ifGenerate is False:
                 raise "No token to spend gas fee"
-            chainID = input('Please choose the chain you would like to use\n1: Ethereum, 137: Polygon')
             """
             1: Ethereum, 137: Polygon
             """
@@ -161,10 +160,10 @@ class mailbox():
         """
 
 
-msg = mailbox(ifHadAccount=False)
+msg = mailbox(ifHadAccount=True)
 msg.encrypt(
-    senderPublicKey=0x017547c5eaae082fba7276c537a073d010d4000b7fa46e897f7b6849f3083f0a2456034a03631cc34392ef8d4c38f62aebcca32b08dc6202b47ead07b0a25b6b,
-    senderAddr=None,Type='ESA')
+    senderPublicKey=0x2251f7f151a2e178b37d9e9b6cfad9253ae08427392f5436c351d5380c7eb367066cb756a3bb89cbe28147ca6d03a9ae9587a75dd1cfd33f1b873667a9c78bb4,
+    senderAddr=None,Type='RSA')
 msg.sign()
-msg.decrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360,password=None)
-msg.sendOnline(False)
+msg.decrypt(senderAddr=0xD4B53e0EeE41636454f1BBB4834b3a5bCE07d815,password=None)
+msg.sendOnline('80001',True)
