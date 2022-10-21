@@ -3,6 +3,7 @@ import ecies
 
 
 def encryptWithPublicKey(publicKey):
+
     with open('data.txt', 'r') as f:
         msg = f.read().encode('utf-8')
     assert len(publicKey) == 130

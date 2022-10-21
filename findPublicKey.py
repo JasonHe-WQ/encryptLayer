@@ -78,7 +78,7 @@ def find(addr):
             signature_obj = KeyAPI.Signature(vrs=(v, r, s))
             pubkey = signature_obj.recover_public_key_from_msg_hash(hash_bytes)
 
-        publicKey = str(pubkey).replace("0x", '04')
+        publicKey = str(pubkey)
         return publicKey
 
 # publicKey=find("0x5568BC7EebC605A88e247769c4acA92d95BC9360")
