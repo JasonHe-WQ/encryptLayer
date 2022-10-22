@@ -6,10 +6,11 @@
 可能不会有前端(以后会考虑，但是我目前不会js)。<br>
 现在已经可以上polygon testnet<br>
 以后可以支持更多链的交易查找<br>
-再次感谢[maiyude2018](https://github.com/maiyude2018)大佬,感谢[script-money](https://github.com/script-money)大佬让我接触到这么优秀的大佬<br>
+再次感谢[maiyude2018](https://github.com/maiyude2018)大佬,感谢[script-money](https://github.com/script-money)
+大佬让我接触到这么优秀的大佬<br>
 还要感谢box和h神，不断地给我提示，支持我<br>
 关于哈希算公钥和其他密码学的原理，我推荐一些文章<br>
-[关于公钥的压缩与解压](https://medium.com/asecuritysite-when-bob-met-alice/satoshi-selected-ecdsa-with-the-secp256k1-curve-and-sha-256-are-other-options-available-9ebc87053272)<br>
+[关于公钥的压缩与解压](https://medium.com/asecuritysite-when-bob-met-alice/02-03-or-04-so-what-are-compressed-and-uncompressed-public-keys-6abcb57efeb6)<br>
 [公钥的反向计算Go实现](https://medium.com/asecuritysite-when-bob-met-alice/can-we-recover-the-public-key-from-an-ecdsa-signature-7af4b56a8a0f)<br>
 [比特币加密算法](https://medium.com/asecuritysite-when-bob-met-alice/satoshi-selected-ecdsa-with-the-secp256k1-curve-and-sha-256-are-other-options-available-9ebc87053272)<br>
 [寻找随机素数](https://medium.com/asecuritysite-when-bob-met-alice/how-long-does-it-take-to-find-a-random-prime-number-92fbd484036)<br>

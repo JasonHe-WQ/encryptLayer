@@ -1,16 +1,18 @@
+from eth_account import Account
+from eth_hash.auto import keccak
+from eth_keys import KeyAPI
+from eth_keys import keys
+from web3 import Web3
+
+import ESADecrypt
+import ESAEncrypt
 import decrypt1
+import decrypt2
 import encrypt1
 import encrypt2
-import decrypt2
-import generatePrivateKey
 import findPublicKey
-from eth_account import Account
-import ESAEncrypt
-import ESADecrypt
-from eth_keys import keys
-from eth_keys import KeyAPI
+import generatePrivateKey
 import sentToBlockChain
-from web3 import Web3
 
 
 class mailbox():
@@ -74,21 +76,25 @@ class mailbox():
         self.encryptType = Type
         if self.encryptType == 'RSA':
             if senderAddr is None:
-                if eval(senderPublicKey) == 0:
+                if senderPublicKey is None:
                     self.senderPublicKey = self.publicKey
                 else:
                     self.senderPublicKey = '0x' + hex(senderPublicKey)[2:].zfill(128)
+                    senderPublicKey = bytes().fromhex(hex(senderPublicKey)[2:].zfill(128))
+                    self.senderAddr = int('0x' + keccak(senderPublicKey).hex()[-40:], 16)
+
             else:
                 """
                 If the sender has made any tx, you can get the public key. Else, you can only send message to
                 who revealed the public key.
                 Network supported: ETH
                 """
-                self.senderAddr = Web3.toChecksumAddress(senderAddr)
-                self.senderPublicKey = findPublicKey.find(self.senderAddr)
-                """
-                IT DOES NOT WORK RIGHT NOW
-                """
+                self.senderAddr = senderAddr
+                if senderPublicKey is None:
+                    self.senderAddr = Web3.toChecksumAddress(senderAddr)
+                    self.senderPublicKey = findPublicKey.find(self.senderAddr)
+                else:
+                    self.senderPublicKey = senderPublicKey
             if self.senderPublicKey is not None:
                 self.encryptedBytes = encrypt2.encryptWithPublicKey(self.senderPublicKey)
             else:
@@ -159,8 +165,8 @@ class mailbox():
 
 msg = mailbox(ifHadAccount=True)
 msg.encrypt(
-    senderPublicKey=None,
-    senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360, Type='RSA')
+    senderPublicKey=0x017547c5eaae082fba7276c537a073d010d4000b7fa46e897f7b6849f3083f0a2456034a03631cc34392ef8d4c38f62aebcca32b08dc6202b47ead07b0a25b6b,
+    senderAddr=None, Type='RSA')
 msg.sign()
-msg.decrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360, password=None)
+# msg.decrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360, password=None)
 msg.sendOnline(chainID='80001', permanent=True)

@@ -3,7 +3,8 @@ import ecies
 
 
 def encryptWithPublicKey(publicKey):
-
+    if type(publicKey) == int:
+        publicKey = hex(publicKey)
     with open('data.txt', 'r') as f:
         msg = f.read().encode('utf-8')
     assert len(publicKey) == 130
@@ -12,4 +13,3 @@ def encryptWithPublicKey(publicKey):
         f.write(encryptedData)
     print('The encrypted data has been saved as "encryptedData.bin" encrypted by {}\n'.format(publicKey))
     return encryptedData
-

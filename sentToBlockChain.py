@@ -1,5 +1,6 @@
-from web3 import Web3
 import requests
+from web3 import Web3
+
 explorer = {
     '1': 'https://api.etherscan.io',
     '137': 'https://api.polygonscan.com',
@@ -21,6 +22,7 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
         '137': 'https://polygon-rpc.com',
         '80001': 'https://rpc-mumbai.maticvigil.com'
     }
+    print(type(toAddress))
     with open('signedMessage.bin', 'rb') as f:
         signedBytes = f.read()
 
