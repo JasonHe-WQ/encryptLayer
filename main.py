@@ -63,7 +63,7 @@ class mailbox():
         self.signature = encrypt1.signWithPrivateKey(self.__privateKeyInHex)
         print('The Signature by address:  {} has been saved as "signedMessage.bin"'.format(hex(self.address)))
 
-    def encrypt(self, senderPublicKey=None, senderAddr=None, Type='RSA'):
+    def encrypt(self, *, senderPublicKey=None, senderAddr=None, Type='RSA'):
         """
         This method will read the text file named 'data.txt' and generate an encrypted text file named
         'encryptedData.txt' with the receiver's address
@@ -106,7 +106,7 @@ class mailbox():
         else:
             raise 'Error, Not supported encrypt type'
 
-    def decrypt(self, senderAddr=None, password=None):
+    def decrypt(self, *, senderAddr=None, password=None):
         """
         This method will decrypt and print the data
         :param senderAddr: When self.encryptType == 'RSA', please use this parameter with Hex

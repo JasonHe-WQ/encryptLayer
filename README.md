@@ -2,10 +2,7 @@
 ## CN<br>
 这是一个完全在本地的基于以太坊账户系统的端对端加密系统。<br>
 感谢maiyude2018大佬，完善了公钥查找。<br>
-预计下周可以写完私人服务器部署，消息将保留7天<br>
-可能不会有前端(以后会考虑，但是我目前不会js)。<br>
 现在已经可以上polygon testnet<br>
-以后可以支持更多链的交易查找<br>
 再次感谢[maiyude2018](https://github.com/maiyude2018)大佬,感谢[script-money](https://github.com/script-money)
 大佬让我接触到这么优秀的大佬<br>
 还要感谢box和h神，不断地给我提示，支持我<br>
@@ -40,7 +37,7 @@ Clone or download the source code of this project, and open 'main.py'<br><br>
 
 
 
-```commandline
+```python3
 msg = mailbox(ifHadAccount=True) #default: False
 ```
 初始化`mailbox`这个类,参数`ifHadAccount`代表你是否愿意使用已有账户,输入`True`会要求
@@ -52,7 +49,7 @@ and `False` means this programme will generate an account<br><br>
 
 
 
-```commandline
+```python3
 msg.encrypt(
     senderPublicKey=None,
     senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360, Type='RSA')
@@ -69,7 +66,7 @@ When using `Type` as `ESA`, the password will be stored in local computer.<br>
 
 
 
-```commandline
+```python3
 msg.sign()
 ```
 这个函数将会使用你的私钥对消息签名<br>
@@ -77,7 +74,7 @@ This method will sign the massage with your private key<br><br>
 
 
 
-```commandline
+```python3
 msg.decrypt(senderAddr=0x5568BC7EebC605A88e247769c4acA92d95BC9360, password=None)
 ```
 这个函数将会对签名校验，如果是`senderAddr`发送的信息，将会使用你的私钥解密并输出(`RSA`)或使用保存
@@ -89,7 +86,7 @@ your password in **bytes string**<br><br>
 
 
 
-```commandline
+```python3
 msg.sendOnline(chainID='80001', permanent=False)
 ```
 这个函数将会把你的签名和加密后的信息作为**字节串**上传,当第二个参数`permanent`为`True`
