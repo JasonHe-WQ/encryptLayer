@@ -34,11 +34,11 @@ def send(chainID, yourAddress, toAddress, privateKeyInBytes):
     # data = requests.get(gasOracleUrl, headers=dataHeader).json()
     # gasPrice = int(eval(data['result']['ProposeGasPrice'])*1000000000)
     rawHex = w3.eth.account.sign_transaction(dict(
-        nonce=w3.eth.get_transaction_count(Web3.toChecksumAddress(hex(yourAddress))),
+        nonce=w3.eth.get_transaction_count(Web3.to_checksum_address(hex(yourAddress))),
         maxFeePerGas=2000000000,
         maxPriorityFeePerGas=2000000000,
         gas=400000,
-        to=Web3.toChecksumAddress(hex(toAddress)),
+        to=Web3.to_checksum_address(hex(toAddress)),
         value=0,
         data=signedBytes + bytes('=========='.encode('utf-8')) +encryptedDataBytes,
         type=2,  # (optional) the type is now implicitly set based on appropriate transaction params

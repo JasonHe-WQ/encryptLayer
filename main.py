@@ -42,7 +42,7 @@ class mailbox():
 
         else:
             privateKeyInHex = input('Please Import Your Private Key In Hex')
-            acct = Account.privateKeyToAccount(privateKeyInHex)
+            acct = Account.from_key(privateKeyInHex)
             self.__privateKey = acct.key
             self.address = acct.address
             self.__privateKeyInHex = privateKeyInHex
@@ -91,7 +91,7 @@ class mailbox():
                 """
                 self.senderAddr = senderAddr
                 if senderPublicKey is None:
-                    self.senderAddr = Web3.toChecksumAddress(senderAddr)
+                    self.senderAddr = Web3.to_checksum_address(senderAddr)
                     self.senderPublicKey = findPublicKey.find(self.senderAddr)
                 else:
                     self.senderPublicKey = senderPublicKey
